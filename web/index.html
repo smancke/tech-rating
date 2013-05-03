@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Tech Rating</title>
+<script src="jquery.js"></script>
+<script src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="jquery.svg.js"></script>
+<link rel="stylesheet" type="text/css" href="jquery.svg.css">
+<style>
+/* ------- misc -------------- */
+body {  background: #222240; }
+h3 {
+        margin: 5px 5px 5px 10px;
+}
+a {
+       color:#000000;
+       text-decoration:none;
+}
+
+.success-message {
+  border: 2px solid #00aa55;
+  font-size: 1.2em;
+  color: #00aa55;
+  padding: 5px;
+  border-radius: 5px 5px 5px 5px;
+  font-family: arial;
+}
+
+.error-message {
+  border: 2px solid #dd0000;
+  font-size: 1.2em;
+  color: #dd0000;
+  padding: 5px;
+  border-radius: 5px 5px 5px 5px;
+  font-family: arial;
+}
+
+/* ------ forms ------------- */
+.formrow {
+  clear: both;
+  padding: 2px 0px;
+}
+.label {
+  float: left;
+  text-align: left;
+  padding-top: 3px;
+  padding-right: 5px;
+}
+.formfield {
+  border: 1px solid #000000;
+  float: right;
+  width: 250px;
+  text-align: left;
+} 
+
+/* --------- the tab pane ---------- */
+.tab-pane {
+       background: #feffc6;
+       margin-left: 5px;
+       padding: 15px;
+       width: 97%;
+       height: 600px;
+       clear: both;
+       border-radius: 0px 5px 5px 5px;
+}
+.tab-inactive {
+       background: #54549e;
+       margin: 10px 0 0 5px; 
+       padding: 3px 5px 0px 5px;
+       height: 29px; 
+       float: left; 
+       border-radius: 5px 5px 0px 0px;
+       font-size: 1.2em;
+       font-family: arial;
+}
+.tab-active {
+       background: #feffc6;
+       margin: 0 0 0 5px;
+       padding: 7px 15px 0px 15px;
+       height: 35px; 
+       float: left;
+       border-radius: 5px 5px 0px 0px;
+       font-size: 1.2em;
+       font-family: arial;
+}
+
+/* -------- item boxes ----------- */
+.item-box {
+	border: 3px solid #b3b3b3;
+        background: #e6e0ff ;
+        font-family: arial;
+	color: #555555;
+        border-radius:15px
+}
+.rating-box {
+        height: 300px;
+        width: 25%;
+        margin: 1% 1% 0 0;
+        float: left;         
+	border: 2px solid #999999;
+        background: #f0f0f0 ;
+        font-family: arial;
+	color: #555555;
+        border-radius:5px
+}
+ul { 
+        list-style-type: none; margin: 0px; padding: 0; 
+        width: 100%;
+        overflow: auto;
+        overflow-x: hidden;
+}
+li {
+        margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; 
+        float: left;         
+}
+</style>
+<script src="restclient.js"></script>
+<script src="index.js"></script>
+<script src="radar-pane.js"></script>
+</head>
+<body>
+  <div id="menu">
+    <div id="category-menu-location"/>
+    <div id="menu-login" class="tab-active" style="float: right; margin-right: 20px;">
+      <a id="link-logout" href="javascript:doLogout()">Logout</a>
+    </div>
+    <div id="menu-radar" class="tab-active" style="float: right; margin-right: 5px;">
+      <a id="link-radar" href="javascript:showRadarPane()">Radar</a>
+    </div>
+    <div id="menu-createItem" class="tab-inactive" style="float: right; margin-right: 5px; visibility: hidden">
+      <a href="javascript:showItemPane()">Eintr&auml;ge</a>
+    </div>
+  </div>
+ <div id="content-root" class="tab-pane"/>
+
+</body>
+</html>

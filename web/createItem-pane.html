@@ -1,0 +1,25 @@
+   <div id="content-root" class="tab-pane">
+     <div id="message-box" class=".success-message" style="height: 40; width: 400px; padding: 15px; margin: 0 auto; margin-top: 30px; visibility: hidden">
+     </div>
+     <div class="item-box" style="height: 300px; width: 400px; padding: 15px; margin: 0 auto; margin-top: 20px">
+       <h3>Neue Technologie ...</h3>
+       <form style="margin: 15px" action="" onsubmit="return false;">
+         <div class="formrow">
+           <span class="label">Name:</span>         
+           <input class="formfield" id="name" type="text" name="name"/>
+         </div>
+         <div class="formrow">
+           <span class="label">Beschreibung:</span>         
+           <textarea class="formfield" id="description" style="height: 150px; width: 230;" type="text" name="description"/>
+         </div>
+         <div class="formrow">
+           <span class="label">Kategorie:</span>         
+           <select class="formfield" id="category" type="select" name="category">
+           </select>
+         </div>
+         <div class="formrow">
+           <input class="formfield" type="submit" style="width: 80px;" value="Speichern" onClick="createItem(this.form.name.value, this.form.description.value, this.form.category.value)"/>
+         </div>
+       </form>
+     </div>     
+   </div>
