@@ -8,8 +8,6 @@ import random
 import string
 import cgi
 
-cookie_secret = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(30))
-
 cfg = None
 
 # reads the given file and parses the data as json
@@ -30,6 +28,8 @@ if cfg['db_type'] == 'mysql':
 elif cfg['db_type'] == 'sqlite3':
     import sqlite3
 
+#cookie_secret = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(30))
+cookie_secret = cfg['cookie_secret'];
 
 # escapes html special characters
 def escape(string):

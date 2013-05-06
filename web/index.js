@@ -145,6 +145,10 @@ function showMenuElements() {
 
 function doLogin(username, password) {
     REST.login(username, password, function() {
+        REST.get(REST.url_secure, function() {
+            alert("ok, im in");
+        }, errorHandler);
+
         showMenuElements();
         $("#link-login").replaceWith('<a id="link-logout" href="javascript:doLogout()">Logout</>')
 

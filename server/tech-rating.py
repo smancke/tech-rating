@@ -1,7 +1,11 @@
 #!/usr/bin/python
 
-from bottle import route, run, debug, request, response, redirect, static_file, abort
+import os, sys
+sys.path.append(os.path.dirname(__file__))
+
+from bottle import route, run, debug, request, response, redirect, static_file, abort, default_app
 from helper import jdump, context, seccontext, set_login_cookie, cfg, escape
+
 
 @route('/', method='GET')
 def get_indexpage():
@@ -16,13 +20,13 @@ def secure_test_uri():
 # Enable static file delivery for /web
 @route('/web/<name>', method='GET')
 def get_weblient(name):
-    return static_file(name, "./web");
+    return static_file(name, os.path.dirname(os.path.dirname(__file__)) + "/web");
 
 # Enable static file delivery for /tests
 # This is only enabled, if we are in testmode
 @route('/tests/<name>', method='GET')
 def get_testpage(name):
-    return static_file(name, "./tests");
+    return static_file(name, os.path.dirname(os.path.dirname(__file__)) + "/tests");
 
 @route('/rest/category', method='GET')
 def get_categories():
@@ -104,4 +108,8 @@ def get_advices_bv_user():
 
     
 debug(cfg['debug'])
-run(host=cfg['server_bind_host'], port=cfg['server_bind_port'], reloader=cfg['server_reloader'])
+
+if __name__ =='__main__':
+    run(host=cfg['server_bind_host'], port=cfg['server_bind_port'], reloader=cfg['server_reloader'])
+else:
+    application = default_app()

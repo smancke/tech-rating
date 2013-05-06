@@ -1,15 +1,17 @@
 {
-    "debug": true,
+    "debug": false,
 
     "db_type": "mysql",
     "db_host":  "localhost",
     "db_user":  "root",
-    "db_password": "xxxxx",
-    "db_name": "techrating",
+    "db_password": "ham.egg",
+    "db_name": "radar",
 
-    "server_external_url": "http://127.0.0.1:8080",
+    "server_external_url": "http://127.0.0.1",
 
     "server_bind_host": "localhost",
     "server_bind_port": "8080",
-    "server_reloader": true
+    "server_reloader": false
+
+    "cookie_secret": "4Y4XGRSUL9K2YKEY4UOX8MDOE1B93H";
 }

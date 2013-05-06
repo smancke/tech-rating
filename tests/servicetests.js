@@ -9,6 +9,9 @@ test("I can login with valid credentials", function() {
     REST.async = false;
     REST.login(username, "debug", function() {
         ok(true, "I got the login");
+        REST.get(REST.url_secure, function() {
+            ok(true, "I, now i got access to secure resources");
+        }, errorFunc);
     }, errorFunc);
 });
 
