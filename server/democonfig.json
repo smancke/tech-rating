@@ -1,12 +1,1 @@
-{
-    "debug": true,
-
-    "db_type": "sqlite3",
-    "db_filename":  "/tmp/techrating_demo.db",
-
-    "server_external_url": "http://127.0.0.1:8080",
-
-    "server_bind_host": "localhost",
-    "server_bind_port": "8080",
-    "server_reloader": true
-}
+democonfig_mysql.json

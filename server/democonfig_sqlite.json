@@ -8,7 +8,7 @@
 
     "server_bind_host": "localhost",
     "server_bind_port": "8080",
-    "server_reloader": true
+    "server_reloader": true,
 
-    "cookie_secret": "4Y4XGRSUL9K2YKEY4UOX8MDOE1B93H";
+    "cookie_secret": "4Y4XGRSUL9K2YKEY4UOX8MDOE1B93H"
 }
