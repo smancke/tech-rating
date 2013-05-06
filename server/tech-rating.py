@@ -20,13 +20,13 @@ def secure_test_uri():
 # Enable static file delivery for /web
 @route('/web/<name>', method='GET')
 def get_weblient(name):
-    return static_file(name, os.path.dirname(os.path.dirname(__file__)) + "/web");
+    return static_file(name, os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/web");
 
 # Enable static file delivery for /tests
 # This is only enabled, if we are in testmode
 @route('/tests/<name>', method='GET')
 def get_testpage(name):
-    return static_file(name, os.path.dirname(os.path.dirname(__file__)) + "/tests");
+    return static_file(name, os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/tests");
 
 @route('/rest/category', method='GET')
 def get_categories():

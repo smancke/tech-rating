@@ -1,8 +1,8 @@
-var radius = {adopt: {start: 0, end: 120, label: "Anwenden"},
-              try: {start: 120, end: 190, label: "Ausprobieren"},
-              regard: {start: 190, end: 260, label: "Kennenlernen"},
-              hold: {start: 265, end: 340, label: "Halten"},
-              abolish: {start: 340, end: 395, label: "Abschaffen"}
+var radius = {adopt: {start: 0, end: 120, label: "Einf\u00FChren"},
+              try: {start: 120, end: 190, label: "Testweise einsetzen"},
+              regard: {start: 190, end: 260, label: "Bewerten/Evaliueren"},
+              hold: {start: 265, end: 340, label: "Beibehalten"},
+              abolish: {start: 340, end: 395, label: "Vermeiden/Abschaffen"}
              }
 
 // list with all positions of items [{x:int, y:int}]
@@ -24,7 +24,7 @@ function errorHandler(message) {
 function drawRadarCircle(svg, desc) {
     svg.circle(x(0), y(0), desc.end, 
                    {fill: 'none', stroke: 'blue', strokeWidth: 1}); 
-    svg.rect(x(5), y(-1*desc.end ), 90, 15, 10, 10, {fill: 'white', stroke: 'blue', strokeWidth: 1});
+    svg.rect(x(5), y(-1*desc.end ), 135, 15, 10, 10, {fill: 'white', stroke: 'blue', strokeWidth: 1});
     svg.text(x(10), y(-1*desc.end + 12), desc.label, {fontSize: 12, fontFamily: 'Arial', fill: 'black'}); 
 }
 
@@ -35,7 +35,7 @@ function drawRadar(svg) {
                    {fill: 'none', stroke: 'red', strokeWidth: 1}); 
     drawRadarCircle(svg, radius.regard);
     drawRadarCircle(svg, radius.hold);
-    svg.rect(x(5), y(-1*radius.abolish.end ), 90, 15, 10, 10, {fill: 'white', stroke: 'blue', strokeWidth: 1});
+    svg.rect(x(5), y(-1*radius.abolish.end ), 135, 15, 10, 10, {fill: 'white', stroke: 'blue', strokeWidth: 1});
     svg.text(x(10), y(-1*radius.abolish.end + 12), radius.abolish.label, {fontSize: 12, fontFamily: 'Arial', fill: 'black'}); 
 
 

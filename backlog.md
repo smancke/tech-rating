@@ -24,6 +24,7 @@ The following features should be implemented:
   additional info on mouse-over
   better distribution of points
   Logarythmic point-size within the radar)
+- Sorting of lists
 - Comments of users on Items
 - List of all Items with rating information
 - Users Own technology-radar
