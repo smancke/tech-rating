@@ -2,12 +2,12 @@
 The following features should be implemented:
 
 - Better Names for the Rating Types
-  "Einführen" - Vorschläge, die noch nicht oder nur vereinzelt verwendet werden, aber deren breite Nutzung anzustreben ist.
-  "Testweise einsetzen" - Vorschläge die so interessant und Risikoarm sind, dass sie bereits vorsichtig und testweise eingesetzt werden sollten (insvesondere in Prototypen, internen Projekten).
-  "Bewerten/Evaliueren" - Vorschläge, die angeschaut, bewertet und weiter beobachtet werden sollten.
-  "Beibehalten" - Vorschläge, die schon in der Breite verwendet werden, evtl. nicht mehr der letzte Schrei sind, aber beibehalten werden sollen. 
-  "Vermeiden/Abschaffen" - Vorschläge, die nicht verwendet werden sollten, egal ob sie aktuell eingesetzt werden, oder neue Vorschläge sind.
-  "Nicht Bewertet" - Vorschläge deren Wichtigkeit nicht so hoch ist, dass Du sie bewerten würdest. 
+  - "Einführen" - Vorschläge, die noch nicht oder nur vereinzelt verwendet werden, aber deren breite Nutzung anzustreben ist.
+  - "Testweise einsetzen" - Vorschläge die so interessant und Risikoarm sind, dass sie bereits vorsichtig und testweise eingesetzt werden sollten (insvesondere in Prototypen, internen Projekten).
+  - "Bewerten/Evaliueren" - Vorschläge, die angeschaut, bewertet und weiter beobachtet werden sollten.
+  - "Beibehalten" - Vorschläge, die schon in der Breite verwendet werden, evtl. nicht mehr der letzte Schrei sind, aber beibehalten werden sollen. 
+  - "Vermeiden/Abschaffen" - Vorschläge, die nicht verwendet werden sollten, egal ob sie aktuell eingesetzt werden, oder neue Vorschläge sind.
+  - "Nicht Bewertet" - Vorschläge deren Wichtigkeit nicht so hoch ist, dass Du sie bewerten würdest. 
 - Rename "Infrastruktur & Tooling" -> "Tooling"
 - Tooltips, Descriptions and hints within the Application
 - Description Page at start of the application
