@@ -10,6 +10,7 @@ The following features should be implemented:
   - "Nicht Bewertet" - Vorschläge deren Wichtigkeit nicht so hoch ist, dass Du sie bewerten würdest. 
 - Rename "Infrastruktur & Tooling" -> "Tooling"
 - Tooltips, Descriptions and hints within the Application
+
 - Description Page at start of the application
 - The configuration should be taken from a standard place e.g. /etc/...
 - The login should be verified against a backend systen (e.g. ldap)
@@ -18,7 +19,9 @@ The following features should be implemented:
 - Better usability of drag-and-drop
 - Unique Item names
 - The Radar should look better 
-  (more space in the middle,
+  (
+  tooltips
+  more space in the middle,
   no red line
   only text on relevant items
   additional info on mouse-over

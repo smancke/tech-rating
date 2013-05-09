@@ -18,6 +18,21 @@ a {
        text-decoration:none;
 }
 
+.tooltip, .active-tooltip {
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #feffc6;
+  border: 2px solid #00aa55;
+  border-radius: 5px 5px 5px 5px;
+  padding: 3px;
+  font-size: small;
+  font-family: arial;
+  font-weight: normal;
+  max-width: 250px;
+}
+
 .success-message {
   border: 2px solid #00aa55;
   font-size: 1.2em;
@@ -91,7 +106,8 @@ a {
         background: #e6e0ff ;
         font-family: arial;
 	color: #555555;
-        border-radius:15px
+        border-radius:15px;
+        cursor: pointer;
 }
 .description {
         font-size: 0.7em;
@@ -103,12 +119,13 @@ a {
         margin: 1% 1% 0 0;
         float: left;         
 	border: 2px solid #999999;
-        background: #f0f0f0 ;
+         background: #f0f0f0 ;
         font-family: arial;
 	color: #555555;
         border-radius:5px
 }
 ul { 
+margin: auto;
         list-style-type: none; margin: 0px; padding: 0; 
         width: 100%;
         overflow: auto;

@@ -62,6 +62,7 @@ function activatePaneTab(paneName) {
         $(this).removeClass("tab-active").addClass("tab-inactive");
     });
     $("#menu-"+paneName).removeClass("tab-inactive").addClass("tab-active");
+    enableTooltips();
 }
 
 function showRadarPane() {
@@ -73,13 +74,13 @@ function showRadarPane() {
 }
 
 function showItemPane(paneName) {
-    activatePaneTab("createItem");
     $.get("createItem-pane.html", function(data) {
         $("#content-root").replaceWith(data);
         for (var i in GLOBAL.categories) {
             $('<option value="'+ GLOBAL.categories[i].id +'">' + GLOBAL.categories[i].name +'</option>')
                 .appendTo($("#category"));
-        }    
+        }
+        activatePaneTab("createItem");        
     }, "html");
 }
 
@@ -87,9 +88,9 @@ function showRatingPane(paneName) {
     $.get("rating-pane.html", function(data) {
         $("#content-root").replaceWith(data);
         connectSortables();
+        initRatingPane(paneName);
+        activatePaneTab(paneName);
     }, "html");
-    activatePaneTab(paneName);
-    initRatingPane(paneName);
 }
 
 function initRatingPane(paneName) {
@@ -105,10 +106,13 @@ function initRatingPane(paneName) {
                     
                     var adviceBoxId = "#rating-" + (adviceDict[item.id] ? adviceDict[item.id].advice : 'ignore');
 
-                    var newItem = $('<li id="item-'+item.id+'" class="item-box">'+item['name']+'</li>');
+                    var newItem = $('<li id="item-'+item.id+'" class="item-box">'+item['name']
+                                    +'<div class="tooltip">'+item.description+'</div>'
+                                    +'</li>');
                     newItem.appendTo($(adviceBoxId));
                 }
             }
+            enableTooltips();
         },errorHandler);
     },errorHandler);
 }
@@ -117,8 +121,8 @@ function showPane(paneName) {
     $.get(paneName + "-pane.html", function(data) {
         $("#content-root").replaceWith(data);
         $("#username").focus();
+        activatePaneTab(paneName);
     }, "html");
-    activatePaneTab(paneName);
 }
 
 /// -------------- Login Handling ----------------------
@@ -160,6 +164,10 @@ function connectSortables() {
             var idDraggable = ui.draggable.attr('id').substring(5);
             var advice = $(this).attr('id').substring(7);
 
+            // workarround to ensure that all tooltips are closed
+            $tooltipChild = $(ui.draggable).children(".active-tooltip");
+            hideTooltip($tooltipChild);
+
             REST.saveAdvice(idDraggable, advice, function(locationURI) {
             },errorHandler);
         }
@@ -167,4 +175,28 @@ function connectSortables() {
     $( "#rating-ignore, #rating-adopt, #rating-try, #rating-regard, #rating-hold, #rating-abolish" ).sortable({
         connectWith: ".connectedSortable"
     }).disableSelection();
+}
+
+/// -------------- Tooltips ----------------------
+function moveTooltip(event, parent, tipelement) {
+    tipelement.css('top', event.pageY+10);
+    tipelement.css('left', event.pageX+5);
+}
+function showTooltip(event, parent, tipelement) {
+    tipelement.css('visibility', 'visible');
+    moveTooltip(event, parent, tipelement);
+}
+function hideTooltip(tipelement) {
+    tipelement.css('visibility', 'hidden');
+}
+
+function enableTooltips() {
+    $('.tooltip').each(function(index, element) {
+        var parent = $(element).parent();
+        parent.on('mouseover', function(event) {showTooltip(event, parent, $(element))});
+        parent.on('mousemove', function(event) {moveTooltip(event, parent, $(element))});
+        parent.on('mouseout', function(event) {hideTooltip($(element))});
+        parent.on('mousedown', function(event) {hideTooltip($(element))});
+        $(element).removeClass('tooltip').addClass('active-tooltip');
+    });
 }
