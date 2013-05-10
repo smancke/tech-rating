@@ -70,7 +70,7 @@ function showRatingPane(paneName) {
 }
 
 function initRatingPane(paneName) {
-    REST.get(REST.url_fullratingitem, function(ratingitems) {
+    REST.get(REST.url_fullratingitem + '?category='+paneName, function(ratingitems) {
         REST.getUserAdvicesDict(function(adviceDict) {
 
             $("#rating-ignore").empty();

@@ -68,7 +68,11 @@ def get_ratingitems():
 @route('/rest/fullratingitem', method='GET')
 def get_fullratingitems():
     with context() as cntx:
-        dbitems = cntx.db.fetchdicts("SELECT * FROM ratingitem")
+        category = request.query.get('category')
+        if category:
+            dbitems = cntx.db.fetchdicts("SELECT * FROM ratingitem WHERE category = %s", [category])
+        else:
+            dbitems = cntx.db.fetchdicts("SELECT * FROM ratingitem")
         result = []
         for item in dbitems:
             result.append(get_ratingitem_data(cntx, item['id']))
