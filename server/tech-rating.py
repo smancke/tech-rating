@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(__file__))
 
 from bottle import route, run, debug, request, response, redirect, static_file, abort, default_app
 from helper import jdump, context, seccontext, set_login_cookie, cfg, escape
-
+import imaplib
 
 @route('/', method='GET')
 def get_indexpage():
@@ -36,12 +36,23 @@ def get_categories():
 @route('/rest/login', method='POST')
 def login():
     login_data = request.json
-    if 'password' in login_data and login_data['password'] == 'debug':
+    
+    if cfg['debug'] and 'password' in login_data and login_data['password'] == 'debug':
         set_login_cookie(login_data['username'])
         return '{"status": "ok"}';
-    else:
-        response.status = 401
-        return '{"status": "login not valid"}'
+
+    try:
+        mail = imaplib.IMAP4_SSL(cfg['imap_host'])
+        mail.login(login_data['username'], login_data['password'])        
+        mail.select("inbox")
+        set_login_cookie(login_data['username'])
+        mail.close()
+        return '{"status": "ok"}';
+    except imaplib.IMAP4.error, e:
+        pass
+
+    response.status = 401
+    return '{"status": "login not valid"}'
 
 @route('/rest/logout', method='GET')
 def logut():
@@ -57,7 +68,9 @@ def get_ratingitems():
 @route('/rest/ratingitem/<no>', method='GET')
 def get_ratingitem(no):
     with context() as cntx:
-        ratingitem = cntx.db.fetchdict("SELECT * FROM ratingitem WHERE id = %s", [no]);        
+        ratingitem = cntx.db.fetchdict("SELECT * FROM ratingitem WHERE id = %s", [no]);
+        if not ratingitem:
+            abort(404, "Element not found");
         advices = cntx.db.fetchdicts("SELECT ratingitem_id, advice, count(*) as count FROM `advice` WHERE ratingitem_id = %s GROUP BY ratingitem_id, advice", [no]);
         ratingitem['advices'] = dict();
         maxAdviceCount = 0;
@@ -70,6 +83,13 @@ def get_ratingitem(no):
         ratingitem['maxAdvice'] = maxAdvice;
         return jdump(ratingitem);
 
+@route('/rest/ratingitem/<no>', method='DELETE')
+def delete_ratingitem(no):
+    with seccontext() as cntx:
+        cntx.db.execute("DELETE FROM ratingitem WHERE id = %s", [no]);        
+        cntx.db.execute("DELETE FROM advice WHERE ratingitem_id = %s", [no]);        
+        return '{"status": "ok"}'
+
 @route('/rest/ratingitem', method='POST')
 def create_ratingitem():
     with seccontext() as cntx:
@@ -79,8 +99,18 @@ def create_ratingitem():
                               [escape(item['name']), escape(item['description']), escape(item['category']), cntx.username])
         return redirect("/rest/ratingitem/" + str(dbid), 201);
 
+@route('/rest/ratingitem/<no>', method='PUT')
+def update_ratingitem(no):
+    with seccontext() as cntx:
+        item = request.json            
+        dbid = cntx.db.execute("""UPDATE ratingitem SET 
+                                  name=%s, description=%s, category=%s, creation_author=%s, creation_time="""+cntx.db.time_now()+"""
+                                  WHERE id = %s""",
+                               [escape(item['name']), escape(item['description']), escape(item['category']), cntx.username, no])
+        return '{"status": "ok"}'
+
 @route('/rest/advice', method='POST')
-def create_ratingitem():
+def create_advice():
     with seccontext() as cntx:
         advice = request.json
         #if advice['user'] != cntx.username:

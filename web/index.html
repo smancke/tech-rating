@@ -11,12 +11,30 @@
 /* ------- misc -------------- */
 body {  background: #222240; }
 h3 {
-        margin: 5px 5px 5px 10px;
+  font-family: arial;
+}
+.rating-box > h3 {
+  margin: 5px 5px 5px 10px;
+  font-family: arial;
 }
 a {
        color:#000000;
        text-decoration:none;
 }
+p {
+       margin: 2px 0px 2px 0px;
+}
+
+.text-box {
+	border: 1px solid #b3b3b3;
+        background: #e6e0ff ;
+        font-family: arial;
+	color: #555555;
+        border-radius:15px;
+        padding: 15px;
+        margin: 5px;
+}
+
 
 .tooltip, .active-tooltip {
   visibility: hidden;
@@ -102,12 +120,14 @@ a {
 
 /* -------- item boxes ----------- */
 .item-box {
-	border: 3px solid #b3b3b3;
+	border: 2px solid #b3b3b3;
         background: #e6e0ff ;
         font-family: arial;
 	color: #555555;
         border-radius:15px;
         cursor: pointer;
+        margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; 
+        float: left;         
 }
 .description {
         font-size: 0.7em;
@@ -124,16 +144,44 @@ a {
 	color: #555555;
         border-radius:5px
 }
-ul { 
-margin: auto;
+.rating-box > ul { 
+        margin: auto;
         list-style-type: none; margin: 0px; padding: 0; 
         width: 100%;
         overflow: auto;
         overflow-x: hidden;
 }
-li {
-        margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; 
-        float: left;         
+
+/* -------- create item page ----------- */
+#ratingitem-list {
+        margin: auto;
+        list-style-type: none; margin: 0px; padding: 0; 
+        overflow: auto;
+        overflow-x: hidden;
+}
+ul {
+       list-style-type: none; margin: 5px 5px 5px 15px; padding: 3px; 
+}
+#ratingitem-list > li {
+       display: block;
+       font-size: 1.2em;
+       font-family: arial;
+       font-weight:bold;
+}
+#ratingitem-list li li {
+       display: block;
+       padding: 3px;
+       background-color: #e6e0ff ;
+       border-bottom: 1px solid #b3b3b3;
+       font-size: 1.0em;
+       font-weight:normal;
+}
+li img {
+   width: 16px;
+   height: 16px;
+}
+li a {
+  float:right;
 }
 </style>
 <script src="restclient.js"></script>
@@ -150,10 +198,10 @@ li {
       <a id="link-radar" href="javascript:showRadarPane()">Radar</a>
     </div>
     <div id="menu-createItem" class="tab-inactive" style="float: right; margin-right: 5px; visibility: hidden">
-      <a href="javascript:showItemPane()">Vorschl&auml;ge</a>
+      <a href="javascript:itemPane.show()">Vorschl&auml;ge</a>
     </div>
   </div>
- <div id="content-root" class="tab-pane"/>
+  <div id="content-root" class="tab-pane"/>
 
 </body>
 </html>

@@ -48,10 +48,10 @@ function drawRadar(svg) {
         sectors[categories[1].id] = {x: 1, y: -1}
         sectors[categories[2].id] = {x: -1, y: 1}
         sectors[categories[3].id] = {x: 1, y: 1}
-        svg.text(x(-400), y(-380), categories[0].name, {fontSize: 20, fontFamily: 'Arial', fill: 'black'}); 
-        svg.text(x(400), y(-380), categories[1].name, {fontSize: 20, fontFamily: 'Arial', fill: 'black',  'text-anchor': 'end'}); 
-        svg.text(x(-400), y(395), categories[2].name, {fontSize: 20, fontFamily: 'Arial', fill: 'black'}); 
-        svg.text(x(400), y(395), categories[3].name, {fontSize: 20, fontFamily: 'Arial', fill: 'black',  'text-anchor': 'end'}); 
+        svg.text(x(-400), y(-380), categories[0].name, {fontSize: 16, fontFamily: 'Arial', fill: 'blue'}); 
+        svg.text(x(400), y(-380), categories[1].name, {fontSize: 16, fontFamily: 'Arial', fill: 'blue',  'text-anchor': 'end'}); 
+        svg.text(x(-400), y(395), categories[2].name, {fontSize: 16, fontFamily: 'Arial', fill: 'blue'}); 
+        svg.text(x(400), y(395), categories[3].name, {fontSize: 16, fontFamily: 'Arial', fill: 'blue',  'text-anchor': 'end'}); 
     }, errorHandler);
 }
 

@@ -21,7 +21,7 @@ def readconfig(filename):
 if len(argv) > 1:
     cfg = readconfig(argv[1])
 else:
-    cfg = readconfig(path.dirname(__file__) +  "/democonfig.json")
+    cfg = readconfig('/etc/techrating.conf')
 
 if cfg['db_type'] == 'mysql':
     import MySQLdb
@@ -143,7 +143,10 @@ class DB:
         cur = self.database.cursor()
         cur.execute(self.clean_sql(cmd), values);
         columns = tuple( [d[0].decode('utf8') for d in cur.description] )
-        result = dict(zip(columns, cur.fetchone()))
+        row = cur.fetchone();
+        result = None;
+        if row:
+            result = dict(zip(columns, row))
         cur.close();
         return result
 

@@ -24,7 +24,7 @@ db.execute("""CREATE TABLE IF NOT EXISTS `ratingitem` (
                 `name` varchar(40) NOT NULL,
                 `description` text,
                 `category` varchar(40) NOT NULL,
-                `creation_author` varchar(40) NOT NULL,
+                `creation_author` varchar(50) NOT NULL,
                 `creation_time` datetime NOT NULL
                 ) """+mysql_only('ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci')+""";""", [])
 

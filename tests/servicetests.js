@@ -1,12 +1,21 @@
 
 var username = "debuguser";
+REST.async = false;
 
 var errorFunc = function(message) {
     ok(false, "error calling REST service: "+ message);
 }
 
+function givenAnItem(callback) {
+    var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "cat_1"}
+    REST.createItem(item, function(locationURI) {
+        REST.get(locationURI, function(resultItem) {
+            callback(resultItem);
+        },errorFunc);                     
+    },errorFunc);
+}
+
 test("I can login with valid credentials", function() {
-    REST.async = false;
     REST.login(username, "debug", function() {
         ok(true, "I got the login");
         REST.get(REST.url_secure, function() {
@@ -16,7 +25,6 @@ test("I can login with valid credentials", function() {
 });
 
 test("No login with wrong credentials", function() {
-    REST.async = false;
     REST.login("debuguser", "not_valid", function() {
         ok(false, "I should not got loged in");
     }, function(message) {
@@ -26,7 +34,6 @@ test("No login with wrong credentials", function() {
 });
 
 test("I can request the categories", function() {
-    REST.async = false;
     REST.get(REST.url_category, function(categories) {
         ok(true, "Call returned without error");
         ok($.isArray(categories), "list of categories is an array");
@@ -36,7 +43,6 @@ test("I can request the categories", function() {
 
 test("I can create and read an item", function() {
     var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "cat_1"}
-    REST.async = false;
     REST.createItem(item, 
                  function(locationURI) {
                      ok(locationURI.length > 10, "passed call and got an location String > 10 characters: "+ locationURI);
@@ -53,8 +59,44 @@ test("I can create and read an item", function() {
                  },errorFunc);
 });
 
+test("I can create and delete an item", function() {
+    var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "cat_1"}
+    REST.createItem(item, 
+                 function(locationURI) {
+                     ok(locationURI.length > 10, "passed call and got an location String > 10 characters: "+ locationURI);
+
+                     REST.delete(locationURI, function(resultItem) {
+                         REST.get(locationURI, function(resultItem) {
+                             ok(false, "We should not get this item any more");
+                         },function(error, status) {
+                             ok(true, "We expact an error here");
+                             equal(404, status, "The status should be 404");
+                             console.log("status: "+status);
+                         });
+                     },errorFunc);                     
+                 },errorFunc);
+});
+
+test("I can modify an item", function() {
+    givenAnItem(function(item) {
+        // when I change the values of the item
+        item.name = "New Name";
+        item.description = "New Description";
+        item.category = "new_cat";
+        REST.updateItem(item, function() {
+            ok(true, "updateItem called");
+
+            // then I get the modified item
+            REST.get(REST.url_ratingitem+'/'+item.id, function(resultItem) {
+                equal(item.name, resultItem.name, "Name was saved");
+                equal(item.description, resultItem.description, "description was saved");
+                equal(item.category, resultItem.category, "category was saved");
+            }, errorFunc);            
+        }, errorFunc);
+    })
+});
+
 test("I can request a list of items", function() {
-    REST.async = false;
     REST.get(REST.url_ratingitem, function(result) {
         ok($.isArray(result), "list of items is an array");
         ok(result.length >= 1, "there are elements in the result list: "+result.length);        
@@ -63,7 +105,6 @@ test("I can request a list of items", function() {
 
 
 test("I can create and read an advice", function() {
-    REST.async = false;
     REST.get(REST.url_ratingitem, function(itemlist) {
 
         ok($.isArray(itemlist) && itemlist.length >= 1, "valid items exist");
@@ -90,7 +131,6 @@ test("I can create and read an advice", function() {
 
 
 test("I can request a list of advices filtered by user", function() {
-    REST.async = false;
     REST.get(REST.url_user_advices, function(result) {
         ok($.isArray(result), "list of advices is an array");
         ok(result.length >= 1, "there are elements in the result list: "+result.length);        

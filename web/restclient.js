@@ -34,7 +34,6 @@ REST.login = function(username, password, sucessFunction, errorFunction) {
     });
 }
 
-
 REST.createItem = function(newItem, sucessFunction, errorFunction) {
     $.ajax({
         url: REST.url_createItem,
@@ -49,6 +48,23 @@ REST.createItem = function(newItem, sucessFunction, errorFunction) {
             sucessFunction(location);
         } else {
             errorFunction(jqXHR.status);
+        }
+    });
+}
+
+REST.updateItem = function(newItem, sucessFunction, errorFunction) {
+    $.ajax({
+        url: REST.url_ratingitem + '/' + newItem.id,
+        type: "PUT",
+        data: JSON.stringify(newItem),
+        async: this.async,
+        contentType: 'application/json',
+        dataType: "json"
+    }).always(function(data_jqXHR, textStatus, jqXHR_data) { 
+        if (jqXHR_data.status == 200) {
+            sucessFunction();
+        } else {
+            errorFunction(textStatus, data_jqXHR.status);
         }
     });
 }
@@ -92,7 +108,23 @@ REST.get = function(locationURI, sucessFunction, errorFunction) {
         if (jqXHR.status === 200) {
             sucessFunction(data);
         } else {
-            errorFunction(textStatus);
+            errorFunction(textStatus, data.status);
+        }
+    });
+}
+
+// delete any Ressource
+REST.delete = function(locationURI, sucessFunction, errorFunction) {
+    $.ajax({
+        url: locationURI,
+        type: "DELETE",
+        async: this.async,
+        dataType: "json"
+    }).always(function(data, textStatus, jqXHR) { 
+        if (jqXHR.status === 200) {
+            sucessFunction(data);
+        } else {
+            errorFunction(textStatus, data.status);
         }
     });
 }

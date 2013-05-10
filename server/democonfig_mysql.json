@@ -1,5 +1,7 @@
 {
-    "debug": false,
+    "debug": true,
+
+    "imap_host": "ugs.tarent.de",
 
     "db_type": "mysql",
     "db_host":  "localhost",
@@ -7,11 +9,11 @@
     "db_password": "ham.egg",
     "db_name": "radar",
 
-    "server_external_url": "http://127.0.0.1",
+    "server_external_url": "http://127.0.0.1:8080",
 
     "server_bind_host": "localhost",
     "server_bind_port": "8080",
-    "server_reloader": false,
+    "server_reloader": true,
 
     "cookie_secret": "4Y4XGRSUL9K2YKEY4UOX8MDOE1B93H"
 }
