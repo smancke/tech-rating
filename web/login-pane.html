@@ -3,7 +3,7 @@
        <h3 style="margin: 5px 5px 5px 20px;">'Radar Rating' login:</h3>
        <form style="margin: 15px" action="" onsubmit="return false;">
          <div class="formrow">
-           <span class="label">Benutzername:</span> <input class="formfield" id="username" style="width: 180px;" type="text" name="username"/>
+           <span class="label">E-Mail:</span> <input class="formfield" id="username" style="width: 180px;" type="text" name="username"/>
          </div>
          <div class="formrow">
            <span class="label">Passwort:</span> <input class="formfield" id="password" style="width: 180px;" type="password" name="password"/>
@@ -12,8 +12,7 @@
            <input class="formfield"  style="width: 80px;" type="submit" value="Login" onClick="doLogin(this.form.username.value, this.form.password.value)"/>
          </div>
          <p id="login-error-message" class="error-message" style="margin-top: 30px; visibility: hidden">Fehlerhafter Login!</p>
-         <p >(Bitte ldap Benutzernamen angeben</p>
-         <p >Passwort ist aktuell = 'debug')</p>
+         <p >(Bitte E-Mail und ldap Benutzernamen angeben)</p>
        </form>
      </div>     
    </div>

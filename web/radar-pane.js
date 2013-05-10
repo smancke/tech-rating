@@ -28,7 +28,7 @@ function drawRadarCircle(svg, desc) {
     svg.text(x(10), y(-1*desc.end + 12), desc.label, {fontSize: 12, fontFamily: 'Arial', fill: 'black'}); 
 }
 
-function drawRadar(svg) {
+function drawRadar(svg) {       
     drawRadarCircle(svg, radius.adopt);
     drawRadarCircle(svg, radius.try);
     svg.circle(x(0), y(0), radius.regard.end+4, 
@@ -91,15 +91,20 @@ function getFreePosition(position, minRadius, maxRadius) {
     return position;
 }
 
-function  drawRatingItem(svg, label, area, areaRating, sectorX, sectorY, bubleSize) {
+function  drawRatingItem(svg, label, description, area, areaRating, sectorX, sectorY, bubleSize) {
     var g = svg.group({stroke: 'blue', strokeWidth: 1}); 
     var thisRadius = radius[area].start +  areaRating*(radius[area].end-radius[area].start);
     var angle = hashCode(label) * Math.PI / 180;
     position = { x: sectorX * thisRadius * Math.cos(angle),  y: sectorY * thisRadius * Math.sin(angle) };
     position = getFreePosition(position, radius[area].start, radius[area].end);
     allPositions.push(position);
-    svg.circle(x(position.x), y(position.y), bubleSize, 
+    var circle = svg.circle(x(position.x), y(position.y), bubleSize, 
                    {fill: 'blue', stroke: 'none', strokeWidth: 1}); 
+
+    //$(circle).on('mouseover', function(event) {alert(label)});
+
+    $('<div class="svgtooltip" style=""><b>'+label+':</b>'+description+'</div>').appendTo($(circle));
+
     if (sectorX > 0) {
         svg.text(x(position.x+(2+bubleSize)), y(position.y+3), label, {fontSize: 10, fontFamily: 'Arial', fill: 'black'}); 
     } else {
@@ -115,8 +120,9 @@ function draw(svg) {
         for (var i in itemlist) {
             REST.get(itemlist[i].self, function(item) {
                 if (item.maxAdvice != 'ignore') {
-                    drawRatingItem(svg, item.name, item.maxAdvice, 0.5, sectors[item.category].x, sectors[item.category].y, item.advices[item.maxAdvice]);
+                    drawRatingItem(svg, item.name, item.description, item.maxAdvice, 0.5, sectors[item.category].x, sectors[item.category].y, item.advices[item.maxAdvice]);
                 }
+                enableTooltips();
             }, console.log);
         }
     }, errorHandler);

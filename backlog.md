@@ -5,11 +5,10 @@ The following features should be implemented:
 - Rename "Infrastruktur & Tooling" -> "Tooling"
 - Tooltips, Descriptions and hints within the Application
 - Description Page at start of the application
-
 - The configuration should be taken from a standard place e.g. /etc/...
 - The login should be verified against a backend systen (e.g. ldap)
 - Edit and Delete of Items
-- Better usability of drag-and-drop
+
 - The Radar should look better 
   (
   tooltips
@@ -19,7 +18,9 @@ The following features should be implemented:
   additional info on mouse-over
   better distribution of points
   Logarythmic point-size within the radar)
+- Better usability of drag-and-drop
 - Item Descriptions and further Information of an item on click
+
 - Unique Item names
 - Sorting of lists
 - Comments of users on Items

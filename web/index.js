@@ -55,8 +55,8 @@ function activatePaneTab(paneName) {
 function showRadarPane() {
     $.get("radar-pane.html", function(data) {
         $("#content-root").replaceWith(data);
-        activatePaneTab('radar');
         $('#radar').svg({onLoad: draw});
+        activatePaneTab('radar');
     }, "html");
 }
 
@@ -279,5 +279,15 @@ function enableTooltips() {
         parent.on('mouseout', function(event) {hideTooltip($(element))});
         parent.on('mousedown', function(event) {hideTooltip($(element))});
         $(element).removeClass('tooltip').addClass('active-tooltip');
+    });
+
+    $('.svgtooltip').each(function(index, element) {
+        var parent = $(element).parent();
+        parent.on('mouseover', function(event) {showTooltip(event, parent, $(element))});
+        parent.on('mousemove', function(event) {moveTooltip(event, parent, $(element))});
+        parent.on('mouseout', function(event) {hideTooltip($(element))});
+        parent.on('mousedown', function(event) {hideTooltip($(element))});
+        $(element).removeClass('svgtooltip').addClass('active-tooltip');
+        $(element).appendTo($('body'));
     });
 }
