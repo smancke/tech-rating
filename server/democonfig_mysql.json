@@ -1,12 +1,12 @@
 {
     "debug": true,
 
-    "imap_host": "ugs.tarent.de",
+    "imap_host": "mail.server.de",
 
     "db_type": "mysql",
     "db_host":  "localhost",
     "db_user":  "root",
-    "db_password": "ham.egg",
+    "db_password": "xxxx",
     "db_name": "radar",
 
     "server_external_url": "http://127.0.0.1:8080",
