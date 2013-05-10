@@ -63,16 +63,16 @@ def logut():
 def get_ratingitems():
     with context() as cntx:
         item_self_link = cntx.db.concat("'" + cfg['server_external_url'] + "/rest/ratingitem/'", "id");
-        return jdump(cntx.db.fetchdicts("SELECT *, "+item_self_link+" as self FROM ratingitem"))
+        return jdump(cntx.db.fetchdicts("SELECT *, "+item_self_link+" as self FROM ratingitem ORDER BY name"))
 
 @route('/rest/fullratingitem', method='GET')
 def get_fullratingitems():
     with context() as cntx:
         category = request.query.get('category')
         if category:
-            dbitems = cntx.db.fetchdicts("SELECT * FROM ratingitem WHERE category = %s", [category])
+            dbitems = cntx.db.fetchdicts("SELECT * FROM ratingitem WHERE category = %s ORDER BY name", [category])
         else:
-            dbitems = cntx.db.fetchdicts("SELECT * FROM ratingitem")
+            dbitems = cntx.db.fetchdicts("SELECT * FROM ratingitem ORDER BY name")
         result = []
         for item in dbitems:
             result.append(get_ratingitem_data(cntx, item['id']))

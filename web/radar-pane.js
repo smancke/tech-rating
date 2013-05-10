@@ -63,7 +63,7 @@ function drawRadar(svg, nextFunction) {
     svg.text(x(400), y(395), categories[3].name, {fontSize: 16, fontFamily: 'Arial', fill: 'black',  'text-anchor': 'end'}); 
 }
 
-function hashCode(str, mod=90){
+function hashCode(str, mod){
     var hash = 0;
     if (str.length == 0) return hash;
     for (i = 0; i < str.length; i++) {
@@ -99,7 +99,7 @@ function getFreePosition(position, minRadius, maxRadius) {
     return position;
 }
 
-function getSVGTooltip(item, cssclass='tooltip') {
+function getSVGTooltip(item, cssclass) {
     var html = '<div class="'+cssclass+'" style="">' 
         +'<h3>'+item.name+'</h3>'+item.description
         + '<svg version="1.1" width="300" height="150">';
@@ -113,7 +113,9 @@ function getSVGTooltip(item, cssclass='tooltip') {
         html += '<text x="145" y="'+ pos*25 +'" font-size="12" font-family="Arial" fill="black" text-anchor="end">'+(count ?count:0)+'</text>';
         pos++;
     }
-    html += '</svg></div>';
+    html += '</svg>';
+    html += '<span>Vorgeschlagen: '+item.creation_author+', '+item.creation_time+'</span>';
+    html += '</div>';
     return html;
 }
 

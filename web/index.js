@@ -116,7 +116,7 @@ itemPane = {
     },
     
     refreshItemList: function() {
-        REST.get(REST.url_ratingitem, function(ratingitems) {
+        REST.get(REST.url_fullratingitem, function(ratingitems) {
             $("#ratingitem-list").empty();
             
             for (var c in GLOBAL.categories) {
@@ -130,8 +130,8 @@ itemPane = {
                 var catListId = "#category-list-" + item.category;
                 
                 var newItem = $('<li id="item-'+item.id+'" class="">'
-                                +'<span>'+ item['name']
-                                +'  <div class="tooltip">'+item.description+'</div>'
+                                +'<span style="cursor: pointer;" onClick="javascript:itemPane.selectItemForEdit(\''+item.id+'\')">'+ item['name']
+                                + getSVGTooltip(item, cssclass='tooltip')
                                 +'</span>'
                                 +'<a href="javascript:itemPane.selectItemForEdit(\''+item.id+'\')"><img src="edit.png" alt="Löschen"><div class="tooltip">Bearbeiten</div></a>'
                                 +'<a href="javascript:itemPane.selectItemForDelete(\''+item.id+'\', \''+item.name+'\')"><img src="delete.png" alt="Löschen"><div class="tooltip">L&ouml;schen</div></a>'
