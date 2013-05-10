@@ -70,7 +70,7 @@ function showRatingPane(paneName) {
 }
 
 function initRatingPane(paneName) {
-    REST.get(REST.url_ratingitem, function(ratingitems) {
+    REST.get(REST.url_fullratingitem, function(ratingitems) {
         REST.getUserAdvicesDict(function(adviceDict) {
 
             $("#rating-ignore").empty();
@@ -82,8 +82,9 @@ function initRatingPane(paneName) {
                     var adviceBoxId = "#rating-" + (adviceDict[item.id] ? adviceDict[item.id].advice : 'ignore');
 
                     var newItem = $('<li id="item-'+item.id+'" class="item-box">'+item['name']
-                                    +'<div class="tooltip">'+item.description+'</div>'
+                                    + getSVGTooltip(item, cssclass='tooltip')
                                     +'</li>');
+                    
                     newItem.appendTo($(adviceBoxId));
                 }
             }

@@ -5,6 +5,7 @@ REST.url_login = '/rest/login';
 REST.url_logout = '/rest/logout';
 REST.url_createItem = '/rest/ratingitem';
 REST.url_ratingitem = '/rest/ratingitem';
+REST.url_fullratingitem = '/rest/fullratingitem';
 REST.url_category = '/rest/category';
 REST.url_advice = '/rest/advice';
 REST.url_user_advices = '/rest/user_advices';

@@ -8,18 +8,10 @@ The following features should be implemented:
 - The configuration should be taken from a standard place e.g. /etc/...
 - The login should be verified against a backend systen (e.g. ldap)
 - Edit and Delete of Items
-
 - The Radar should look better 
-  (
-  tooltips
-  more space in the middle,
-  no red line
-  only text on relevant items
-  additional info on mouse-over
-  better distribution of points
-  Logarythmic point-size within the radar)
+
 - Better usability of drag-and-drop
-- Item Descriptions and further Information of an item on click
+- Item Descriptions and further Information of an item on click (in radar and rating-pane)
 
 - Unique Item names
 - Sorting of lists

@@ -65,23 +65,35 @@ def get_ratingitems():
         item_self_link = cntx.db.concat("'" + cfg['server_external_url'] + "/rest/ratingitem/'", "id");
         return jdump(cntx.db.fetchdicts("SELECT *, "+item_self_link+" as self FROM ratingitem"))
 
+@route('/rest/fullratingitem', method='GET')
+def get_fullratingitems():
+    with context() as cntx:
+        dbitems = cntx.db.fetchdicts("SELECT * FROM ratingitem")
+        result = []
+        for item in dbitems:
+            result.append(get_ratingitem_data(cntx, item['id']))
+        return jdump(result);
+
+def get_ratingitem_data(cntx, no):
+    ratingitem = cntx.db.fetchdict("SELECT * FROM ratingitem WHERE id = %s", [no]);
+    if not ratingitem:
+        abort(404, "Element not found");
+    advices = cntx.db.fetchdicts("SELECT ratingitem_id, advice, count(*) as count FROM `advice` WHERE ratingitem_id = %s GROUP BY ratingitem_id, advice", [no]);
+    ratingitem['advices'] = dict();
+    maxAdviceCount = 0;
+    maxAdvice = 'ignore'
+    for advice in advices:
+        ratingitem['advices'][advice['advice']] = advice['count'];
+        if advice['count'] > maxAdviceCount:
+            maxAdviceCount = advice['count'];
+            maxAdvice = advice['advice'];
+    ratingitem['maxAdvice'] = maxAdvice;
+    return ratingitem;
+
 @route('/rest/ratingitem/<no>', method='GET')
 def get_ratingitem(no):
     with context() as cntx:
-        ratingitem = cntx.db.fetchdict("SELECT * FROM ratingitem WHERE id = %s", [no]);
-        if not ratingitem:
-            abort(404, "Element not found");
-        advices = cntx.db.fetchdicts("SELECT ratingitem_id, advice, count(*) as count FROM `advice` WHERE ratingitem_id = %s GROUP BY ratingitem_id, advice", [no]);
-        ratingitem['advices'] = dict();
-        maxAdviceCount = 0;
-        maxAdvice = 'ignore'
-        for advice in advices:
-            ratingitem['advices'][advice['advice']] = advice['count'];
-            if advice['count'] > maxAdviceCount:
-                maxAdviceCount = advice['count'];
-                maxAdvice = advice['advice'];
-        ratingitem['maxAdvice'] = maxAdvice;
-        return jdump(ratingitem);
+        return jdump(get_ratingitem_data(cntx, no));
 
 @route('/rest/ratingitem/<no>', method='DELETE')
 def delete_ratingitem(no):
