@@ -5,18 +5,19 @@ GLOBAL.categories = undefined;
 // initial load 
 // of the login pane
 $(function() {
-    buildCategoryMenu();
+    buildCategoryMenu(function(){
 
-    REST.get(REST.url_secure, 
-             function() { 
-                 showRadarPane();
-                 showMenuElements()
-             },
-             function() { 
-                 showRadarPane();
-                 $("#link-logout").text("Login");
-             }
-            );    
+        REST.get(REST.url_secure, 
+                 function() { 
+                     showRadarPane();
+                     showMenuElements()
+                 },
+                 function() { 
+                     showRadarPane();
+                     $("#link-logout").text("Login");
+                 }
+                );    
+    });
 });
 
 function htmlDecode(string) {
@@ -27,7 +28,7 @@ function errorHandler(message) {
     alert("Fehler beim laden der Anwendung ("+message+")");
 }
 
-function buildCategoryMenu() {
+function buildCategoryMenu(nextFunction) {
     REST.get(REST.url_category, function(categories) {
         GLOBAL.categories = categories;
         for (var i in categories) {
@@ -36,6 +37,7 @@ function buildCategoryMenu() {
               + '    <div class="tooltip">'+categories[i].description+'</div>'
               + '</div>').insertBefore($("#category-menu-location"));
         }
+        nextFunction();
     }, errorHandler);
 }
 
