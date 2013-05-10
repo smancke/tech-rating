@@ -11,6 +11,13 @@ var allPositions = [];
 
 // category id -> {x: -/+1, y: -/+,1}
 var sectors = {};
+function initSectors() {
+    sectors = {};
+    sectors[GLOBAL.categories[0].id] = {x: -1, y: -1}
+    sectors[GLOBAL.categories[1].id] = {x: 1, y: -1}
+    sectors[GLOBAL.categories[2].id] = {x: -1, y: 1}
+    sectors[GLOBAL.categories[3].id] = {x: 1, y: 1}
+}
 
 function x(coord) {
     return 400+coord;
@@ -49,18 +56,11 @@ function drawRadar(svg, nextFunction) {
     drawRadarCircleLabel(svg, radius.adopt, radius.adopt.color);
     drawRadarCircleLabel(svg, radius.abolish, radius.abolish.color);
 
-    REST.get(REST.url_category, function(categories) {
-        sectors[categories[0].id] = {x: -1, y: -1}
-        sectors[categories[1].id] = {x: 1, y: -1}
-        sectors[categories[2].id] = {x: -1, y: 1}
-        sectors[categories[3].id] = {x: 1, y: 1}
-        svg.text(x(-400), y(-380), categories[0].name, {fontSize: 16, fontFamily: 'Arial', fill: 'black'}); 
-        svg.text(x(400), y(-380), categories[1].name, {fontSize: 16, fontFamily: 'Arial', fill: 'black',  'text-anchor': 'end'}); 
-        svg.text(x(-400), y(395), categories[2].name, {fontSize: 16, fontFamily: 'Arial', fill: 'black'}); 
-        svg.text(x(400), y(395), categories[3].name, {fontSize: 16, fontFamily: 'Arial', fill: 'black',  'text-anchor': 'end'}); 
-
-        nextFunction();
-    }, errorHandler);
+    var categories = GLOBAL.categories;
+    svg.text(x(-400), y(-380), categories[0].name, {fontSize: 16, fontFamily: 'Arial', fill: 'black'}); 
+    svg.text(x(400), y(-380), categories[1].name, {fontSize: 16, fontFamily: 'Arial', fill: 'black',  'text-anchor': 'end'}); 
+    svg.text(x(-400), y(395), categories[2].name, {fontSize: 16, fontFamily: 'Arial', fill: 'black'}); 
+    svg.text(x(400), y(395), categories[3].name, {fontSize: 16, fontFamily: 'Arial', fill: 'black',  'text-anchor': 'end'}); 
 }
 
 function hashCode(str, mod=90){
@@ -142,18 +142,16 @@ function  drawRatingItem(svg, item, bubleSize) {
 
 function draw(svg) {
     allPositions = [];
-    sectors = {};
-
-    drawRadar(svg, function() {
-        REST.get(REST.url_fullratingitem, function(itemlist) {
-            for (var i in itemlist) {
-                item = itemlist[i];
-                if (item.maxAdvice != 'ignore') {
-                    drawRatingItem(svg, item);
-                }
+    initSectors();
+    drawRadar(svg);
+    REST.get(REST.url_fullratingitem, function(itemlist) {
+        for (var i in itemlist) {
+            item = itemlist[i];
+            if (item.maxAdvice != 'ignore') {
+                drawRatingItem(svg, item);
             }
-            enableTooltips();        
-        }, errorHandler);
-    });
+        }
+        enableTooltips();        
+    }, errorHandler);
 }
 
