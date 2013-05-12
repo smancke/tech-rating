@@ -152,7 +152,21 @@ def get_advices_bv_user():
         return jdump(cntx.db.fetchdicts("SELECT * FROM advice WHERE user = %s""",
                                         [cntx.username]));
 
+@route('/rest/timeline', method='GET')
+def get_timeline():
+    offset = 0
+    limit = 300
+    with context() as cntx:
+        return jdump(cntx.db.fetchdicts("""(SELECT advice.user as user, name as targetLabel, 'advice' as action, advice.advice as value, advice.creation_time as time
+                                               FROM ratingitem, advice WHERE advice.ratingitem_id = ratingitem.id)
+                                             UNION
+                                             (SELECT creation_author as user, name as targetLabel, 'new' as action, 
+                                               'created' as value, creation_time as time FROM ratingitem)
+                                             ORDER BY time DESC
+                                             LIMIT %s, %s""",
+                                        [offset, limit]));
     
+
 debug(cfg['debug'])
 
 if __name__ =='__main__':

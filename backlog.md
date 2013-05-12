@@ -11,8 +11,8 @@ The following features should be implemented:
 - The Radar should look better 
 - Item Descriptions and further Information of an item on click (in radar and rating-pane)
 - Sorting of lists
-
 - Better usability of drag-and-drop
+
 - Timeline
 
 - Unique Item names

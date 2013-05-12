@@ -136,3 +136,19 @@ test("I can request a list of advices filtered by user", function() {
         ok(result.length >= 1, "there are elements in the result list: "+result.length);        
     },errorFunc);
 });
+
+
+test("I can request the timeline", function() {
+    REST.get(REST.url_timeline, function(timeline) {
+        ok($.isArray(timeline), "the timeline is a list");
+        ok(timeline.length >= 1, "there are elements in the result list: "+timeline.length);
+        
+        var timelineItem = timeline[0];
+        ok(timelineItem.user, "Timeline contains a user");
+        ok(timelineItem.targetLabel, "Timeline contains a label for the target");
+        ok(timelineItem.action, "Timeline contains an action");
+        ok(timelineItem.value, "Timeline contains an value correspondig to the action");
+        ok(timelineItem.time, "Timeline contains a time");
+
+    },errorFunc);
+});

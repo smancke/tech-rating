@@ -3,6 +3,7 @@ var REST = new Object();
 REST.async = true;
 REST.url_login = '/rest/login';
 REST.url_logout = '/rest/logout';
+REST.url_timeline = '/rest/timeline';
 REST.url_createItem = '/rest/ratingitem';
 REST.url_ratingitem = '/rest/ratingitem';
 REST.url_fullratingitem = '/rest/fullratingitem';

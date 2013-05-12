@@ -3,7 +3,8 @@ var radius = {
     hold: {start: 265, end: 340, label: "Beibehalten", color: '#f4faf4'},
     regard: {start: 195, end: 260, label: "Bewerten/Evaliueren", color: '#f4f0f4'},
     try: {start: 130, end: 195, label: "Testweise einsetzen", color: '#e0e0ff'},
-    adopt: {start: 0, end: 130, label: "Einf\u00FChren", color: '#ffd4b0'}
+    adopt: {start: 0, end: 130, label: "Einf\u00FChren", color: '#ffd4b0'},
+    ignore: {start: 0, end: 0, label: "Ignorieren", color: '#cccccc'}
 }
 
 // list with all positions of items [{x:int, y:int}]
@@ -46,7 +47,7 @@ function drawRadar(svg, nextFunction) {
     drawRadarCircle(svg, radius.try, radius.try.color);
     drawRadarCircle(svg, radius.adopt, radius.adopt.color);
 
-    var g = svg.group({stroke: 'black', strokeWidth: 2}); 
+    var g = svg.group({stroke: '#cccccc', strokeWidth: 2}); 
     svg.line(g, x(-400), y(0), x(400), y(0)); 
     svg.line(g, x(0), y(-400), x(0), y(+400)); 
 
@@ -133,13 +134,48 @@ function  drawRatingItem(svg, item, bubleSize) {
 
     $(getSVGTooltip(item, 'svgtooltip')).appendTo($(circle));
 
-    if (item.advices[item.maxAdvice] >= 2) {
+    if (item.advices[item.maxAdvice] >= 3) {
         if (sector.x > 0) {
             svg.text(x(position.x+(2+bubleSize)), y(position.y+3), item.name, {fontSize: 10, fontFamily: 'Arial', fill: 'black'}); 
         } else {
             svg.text(x(position.x-(2+bubleSize)), y(position.y+3), item.name, {fontSize: 10, fontFamily: 'Arial', fill: 'black', 'text-anchor': 'end'}); 
         }
     }
+}
+
+function loadTimeline() {
+    REST.get(REST.url_timeline, function(timeline) {
+        timelineElement = $("#timeline-content");
+        timelineElement.empty();
+
+        user = undefined;
+        currentElement = undefined;
+        for (var i in timeline) {
+            event = timeline[i];
+            if (user != event.user) {
+                user = event.user;
+                if (currentElement)
+                    currentElement.appendTo(timelineElement);
+                currentElement = $('<div class="timeline-event">'
+                                   +  '<div class="timeline-event-header" style="">'
+                                   +   '<span style="float:left">'+event.user+'</span>'
+                                   +   '<span style="float:right">'+event.time+'</span>'
+                                   +  '</div>'
+                                   +'</div>');                
+            }
+            if (event.action == 'advice') {
+                $('<div class="timeline-event-entry" style="clear:both">'+radius[event.value].label +': '+event.targetLabel +'</div>')
+                    .appendTo(currentElement);
+            }
+            else if (event.action == 'new') {
+                $('<div class="timeline-event-entry" style="clear:both; font-weight: bold;">Neuer Vorschlag: '+event.targetLabel +'</div>')
+                    .appendTo(currentElement);
+            }
+        }
+        if (currentElement)
+            currentElement.appendTo(timelineElement);
+        window.setTimeout("loadTimeline()", 10000);
+    }, errorHandler);
 }
 
 function draw(svg) {
@@ -155,5 +191,6 @@ function draw(svg) {
         }
         enableTooltips();        
     }, errorHandler);
+    loadTimeline();
 }
 

@@ -1,6 +1,7 @@
 
 GLOBAL = new Object();
 GLOBAL.categories = undefined;
+GLOBAL.dragging = false;
 
 // initial load 
 // of the login pane
@@ -63,7 +64,6 @@ function showRadarPane() {
 function showRatingPane(paneName) {
     $.get("rating-pane.html", function(data) {
         $("#content-root").replaceWith(data);
-        connectSortables();
         initRatingPane(paneName);
         activatePaneTab(paneName);
     }, "html");
@@ -88,6 +88,7 @@ function initRatingPane(paneName) {
                     newItem.appendTo($(adviceBoxId));
                 }
             }
+            connectSortables();
             enableTooltips();
         },errorHandler);
     },errorHandler);
@@ -261,12 +262,17 @@ function toggleDisplay(elementId) {
 
 /// -------------- Tooltips ----------------------
 function moveTooltip(event, parent, tipelement) {
-    tipelement.css('top', event.pageY+10);
-    tipelement.css('left', event.pageX+5);
+    var isVisible = 'visible' == tipelement.css('visibility');
+    if (!GLOBAL.dragging && isVisible) {
+        tipelement.css('top', event.pageY+10);
+        tipelement.css('left', event.pageX+5);
+    }
 }
 function showTooltip(event, parent, tipelement) {
-    tipelement.css('visibility', 'visible');
-    moveTooltip(event, parent, tipelement);
+    if (!GLOBAL.dragging) {
+        tipelement.css('visibility', 'visible');
+        moveTooltip(event, parent, tipelement);
+    }
 }
 function hideTooltip(tipelement) {
     tipelement.css('visibility', 'hidden');
@@ -278,7 +284,8 @@ function enableTooltips() {
         parent.on('mouseover', function(event) {showTooltip(event, parent, $(element))});
         parent.on('mousemove', function(event) {moveTooltip(event, parent, $(element))});
         parent.on('mouseout', function(event) {hideTooltip($(element))});
-        parent.on('mousedown', function(event) {hideTooltip($(element))});
+        parent.on('mousedown', function(event) {GLOBAL.dragging = true; hideTooltip($(element))});
+        parent.on('mouseup', function(event) {GLOBAL.dragging = false;});
         $(element).removeClass('tooltip').addClass('active-tooltip');
     });
 
