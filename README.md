@@ -3,7 +3,7 @@ tech-rating
 
 tech-rating is a technology rating web platform. The idea was taken from the Thoughtworks Technology Radar [1]. But the tech-rating approach helps to manage this is a more democratic way.
 
-[1] http://www.thoughtworks.com/insights
+You can find a description and some screenshot at: http://smanck.blog.tarent.de/2013/05/23/techrating-application/
 
 
 Installation using wsgi and apache2
