@@ -167,9 +167,9 @@ def get_timeline():
                                         [offset, limit]));
     
 
-debug(cfg['debug'])
 
 if __name__ =='__main__':
+    debug(cfg['debug'])
     run(host=cfg['server_bind_host'], port=cfg['server_bind_port'], reloader=cfg['server_reloader'])
 else:
     application = default_app()
