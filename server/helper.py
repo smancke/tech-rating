@@ -7,12 +7,13 @@ from os import path
 import random
 import string
 import cgi
+import MySQLdb
 
 cfg = None
 
 # reads the given file and parses the data as json
 def readconfig(filename):
-    print "read config from " + filename
+    #print "read config from " + filename
     json_data=open(filename)
     data = load(json_data)
     json_data.close()
@@ -22,11 +23,6 @@ if len(argv) > 1:
     cfg = readconfig(argv[1])
 else:
     cfg = readconfig('/etc/techrating.conf')
-
-if cfg['db_type'] == 'mysql':
-    import MySQLdb
-elif cfg['db_type'] == 'sqlite3':
-    import sqlite3
 
 #cookie_secret = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(30))
 cookie_secret = cfg['cookie_secret'];
@@ -69,16 +65,19 @@ class seccontext:
     db = None
 
     def __enter__(self):
-        cookie = request.get_cookie("radar_login", secret=cookie_secret);
-        if cookie:
-            cookie_data = loads(cookie);
-            username = cookie_data[0]
-            # todo: check expiration date
-            if username:
-                self.username = username
-                self.db = dbcon()
-                return self
-        abort(401, "Sorry, access denied.")
+        self.username = 's.mancke@tarent.de'
+        self.db = dbcon()
+        return self
+#        cookie = request.get_cookie("radar_login", secret=cookie_secret);
+#        if cookie:
+##            cookie_data = loads(cookie);
+#            username = cookie_data[0]
+#            # todo: check expiration date
+#            if username:
+#                self.username = username
+#                self.db = dbcon()
+#                return self
+#        abort(401, "Sorry, access denied.")
     def __exit__(self, type, value, traceback):
         self.db.close()
 

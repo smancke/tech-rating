@@ -7,26 +7,11 @@ from bottle import route, run, debug, request, response, redirect, static_file, 
 from helper import jdump, context, seccontext, set_login_cookie, cfg, escape
 import imaplib
 
-@route('/', method='GET')
-def get_indexpage():
-    return redirect("/web/index.html");
-
 # test url to check, if the session is valid
 @route('/secure', method='GET')
 def secure_test_uri():
     with seccontext() as cntx:
         return '{"status": "ok"}'
-
-# Enable static file delivery for /web
-@route('/web/<name>', method='GET')
-def get_weblient(name):
-    return static_file(name, os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/web");
-
-# Enable static file delivery for /tests
-# This is only enabled, if we are in testmode
-@route('/tests/<name>', method='GET')
-def get_testpage(name):
-    return static_file(name, os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/tests");
 
 @route('/rest/category', method='GET')
 def get_categories():
@@ -168,8 +153,7 @@ def get_timeline():
     
 
 
-if __name__ =='__main__':
-    debug(cfg['debug'])
-    run(host=cfg['server_bind_host'], port=cfg['server_bind_port'], reloader=cfg['server_reloader'])
-else:
-    application = default_app()
+debug(cfg['debug'])
+run(server='cgi')
+
+#    run(host=cfg['server_bind_host'], port=cfg['server_bind_port'], reloader=cfg['server_reloader'])
