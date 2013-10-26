@@ -1,0 +1,3 @@
+[submodule "gui/SimpleOAuthLogin"]
+	path = gui/SimpleOAuthLogin
+	url = https://github.com/smancke/SimpleOAuthLogin.git

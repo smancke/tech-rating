@@ -1,0 +1,173 @@
+
+body {  
+   background: #ffffff;  
+}
+.rating-box > h4 {
+  margin: 5px 5px 5px 10px;
+}
+p {
+       margin: 2px 0px 2px 0px;
+}
+
+.text-box {
+	border: 2px solid #CC0000;
+        background: #ebf0eb;
+        font-family: arial;
+	color: #555555;
+        padding: 15px;
+        margin: 5px;
+        -moz-box-shadow: 7px 7px 5px #888;
+        -webkit-box-shadow: 7px 7px 5px #888;
+        box-shadow: 7px 7px 5px #888;
+}
+
+
+.tooltip, .svgtooltip, .active-tooltip {
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #eee;
+  border: 1px solid #555;
+  border-radius: 5px 5px 5px 5px;
+  padding: 3px;
+  font-size: small;
+  font-family: arial;
+  font-weight: normal;
+  max-width: 310px;
+}
+
+.success-message {
+  border: 2px solid #CC0000;
+  font-size: 1.2em;
+  color: #CC0000;
+  padding: 5px;
+  border-radius: 5px 5px 5px 5px;
+  font-family: arial;
+}
+
+.error-message {
+  border: 2px solid #dd0000;
+  font-size: 1.2em;
+  color: #dd0000;
+  padding: 5px;
+  border-radius: 5px 5px 5px 5px;
+  font-family: arial;
+}
+
+/* ------ forms ------------- */
+.formrow {
+  clear: both;
+  padding: 2px 0px;
+}
+.label {
+  float: left;
+  text-align: left;
+  padding-top: 3px;
+  padding-right: 5px;
+}
+.formfield {
+  border: 1px solid #000000;
+  float: right;
+  width: 250px;
+  text-align: left;
+} 
+
+/* --------- the tab pane ---------- */
+.tab-pane {
+       background: #ffffff;
+       margin-left: 5px;
+       padding: 15px;
+       width: 97%;
+       height: 600px;
+       clear: both;
+       border-radius: 0px 5px 5px 5px;
+}
+
+/* -------- timeline elements ----------- */
+.timeline-event {
+	border: 1px solid #cccccc;
+        background: #eef5ee;
+        font-family: arial;
+	color: #555555;
+        border-radius:3px;
+        margin-bottom: 5px;        
+}
+.timeline-event-header {
+        font-size: 0.8em;
+        padding: 3px;
+        background: #f4f0f4;
+}
+.timeline-event-entry {
+        font-size: 0.7em;
+        padding: 2px;
+        background: #f4faf4;
+}
+
+/* -------- item boxes ----------- */
+.item-box {
+	border: 1px solid #CC0000;
+        background: #ffffff;
+        font-family: arial;
+        border-radius:2px;
+        cursor: pointer;
+        margin: 0 5px 5px 5px; padding: 5px;
+        font-size: 0.9em; 
+        width: 145px; 
+        float: left;         
+}
+.description {
+        font-size: 0.7em;
+        margin: 5px 5px 5px 10px;
+}
+.rating-box {
+        height: 300px;
+        width: 25%;
+        margin: 1% 1% 0 0;
+        float: left;         
+	border: 1px solid #ebebeb;
+        background: #ffffff;
+        font-family: arial;
+        -moz-box-shadow: 3px 3px 2px #888;
+        -webkit-box-shadow: 7px 7px 5px #888;
+        box-shadow: 3px 3px 2px #ebebeb;
+}
+.rating-box > ul { 
+        margin: auto;
+        list-style-type: none; margin: 0px; padding: 0; 
+        width: 100%;
+        overflow: auto;
+        overflow-x: hidden;
+}
+
+/* -------- create item page ----------- */
+#ratingitem-list {
+        margin: auto;
+        list-style-type: none; margin: 0px; padding: 0; 
+        overflow: auto;
+        overflow-x: hidden;
+}
+ul {
+       list-style-type: none; margin: 5px 5px 5px 15px; padding: 3px; 
+}
+#ratingitem-list > li {
+       display: block;
+       font-size: 1.2em;
+       font-family: arial;
+       font-weight:bold;
+}
+#ratingitem-list li li {
+       display: block;
+       padding: 3px;
+       background-color: #ebf0eb;
+       border-bottom: 1px solid #b3b3b3;
+       font-size: 1.0em;
+       font-weight:normal;
+}
+li img {
+   width: 16px;
+   height: 16px;
+}
+li a {
+  float:right;
+}

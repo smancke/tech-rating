@@ -1,0 +1,34 @@
+   <div id="content-root" class="tab-pane">
+
+     <div id="message-box" class=".success-message" style="height: 40; width: 400px; padding: 15px; margin: 0 auto; margin-top: 30px; display: none">
+     </div>
+     <div class="text-box" style="float: left">
+       <ul id="ratingitem-list" style="height: 550px; width: 400px;"/>
+     </div> 
+     <div class="text-box" style="height: 300px; width: 400px; float: left">
+       <h3 id="itemPaneHeader">Neuer Vorschlag ...</h3>
+       <form id="itemEditForm" style="margin: 15px" action="" onsubmit="return false;">
+         <input id="itemid" type="hidden" name="itemid"/>
+         <div class="formrow">
+           <span class="label">Name:</span>         
+           <input class="formfield" id="name" type="text" name="name"/>
+           <div class="tooltip">Bitte einen kurzen sprechenden Namen verwenden.</div>
+         </div>
+         <div class="formrow">
+           <span class="label">Beschreibung:</span>         
+           <textarea class="formfield" id="description" style="height: 150px; width: 230;" type="text" name="description"/>
+           <div class="tooltip">Kurze Beschreibung in Deutsch eingeben.</div>
+         </div>
+         <div class="formrow">
+           <span class="label">Themenbereich:</span>         
+           <select class="formfield" id="category" type="select" name="category">
+           </select>
+           <div class="tooltip">Bitte einen Themenbereich ausw&auml;hlen.</div>
+         </div>
+         <div class="formrow">
+           <input class="formfield" type="submit" style="width: 80px;" value="Speichern" onClick="itemPane.createOrUpdateItem(this.form.itemid.value, this.form.name.value, this.form.description.value, this.form.category.value)"/>
+           <input class="formfield" type="reset" style="width: 100px;" value="Zur&uuml;cksetzen" onClick="itemPane.resetForm();"/>
+         </div>
+       </form>
+     </div>     
+   </div>
