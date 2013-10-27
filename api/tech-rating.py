@@ -4,7 +4,7 @@ import os, sys
 sys.path.append(os.path.dirname(__file__))
 
 from bottle import route, run, debug, request, response, redirect, static_file, abort, default_app
-from helper import jdump, context, set_login_cookie, cfg, escape
+from helper import jdump, context, cfg, escape
 import imaplib
 
 @route('/<project>/category', method='GET')
@@ -94,7 +94,7 @@ def create_advice(project):
 @route('/<project>/advice/<user>/<ratingitem_id>', method='GET')
 def get_advice(project, user, ratingitem_id):
     with context(project, 'read') as cntx:
-        return jdump(cntx.db.fetchdict("SELECT * FROM advice WHERE user = %s and ratingitem_id = %s AND project_id = %s""",
+        return jdump(cntx.db.fetchdict("SELECT * FROM advice WHERE user_id = %s and ratingitem_id = %s AND project_id = %s""",
                                        [user, ratingitem_id, cntx.pid]));
     
 @route('/<project>/user_advices', method='GET')
@@ -119,7 +119,7 @@ def get_timeline(project):
     
 
 
-debug(cfg['debug'])
 run(server='cgi')
 
+#debug(cfg['debug'])
 #    run(host=cfg['server_bind_host'], port=cfg['server_bind_port'], reloader=cfg['server_reloader'])

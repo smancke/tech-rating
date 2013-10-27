@@ -1,0 +1,6 @@
+
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*) ../gui/radar.php?project=meinRating [L]

@@ -1,14 +1,18 @@
-<?php
+<?php $cfg = json_decode(<<<EOT
+{
+                
+    "db_host":  "localhost",
+    "db_user":  "root",
+    "db_password": "secret",
+    "db_name": "techratingdb",
+    "db_logfile": "",
 
-$cfg['dbhost'] = 'localhost';
-$cfg['dbuser'] = 'backle';
-$cfg['dbpassword'] = 'backle';
-$cfg['dbname'] = 'backle';
+    "google": {
+        "client_id": "your-client-id.apps.googleusercontent.com",
+        "client_secret": "your-client-secret-sdccerferfg",
+        "redirect_uri": "http://127.0.0.1/gui/login.php"
+    }
 
-$cfg['cookie_secret'] = 'secret_key_for_cookies';
-
-$cfg['google']['client_id'] = 'your-client-id.apps.googleusercontent.com';
-$cfg['google']['client_secret'] = 'your-client-secret-hlkmlzztmnksdcsd';
-$cfg['google']['redirect_uri'] = 'http://127.0.0.1/app/c/login';
-
-?>
+}
+EOT
+); ?>

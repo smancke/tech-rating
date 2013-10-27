@@ -13,19 +13,19 @@ cfg = None
 
 # reads the given file and parses the data as json
 def readconfig(filename):
-    #print "read config from " + filename
-    json_data=open(filename)
-    data = load(json_data)
-    json_data.close()
+    file = open(filename)
+    file_data = file.read()
+
+    #remove the first and the last two lines, because config is wrapped in php script
+    file_array = file_data.split("\n")[1:-2]
+    json_data = "".join(file_array)
+
+    data = loads(json_data)
+    file.close()
     return data
 
-if len(argv) > 1:
-    cfg = readconfig(argv[1])
-else:
-    cfg = readconfig('/etc/techrating.conf')
+cfg = readconfig('../config.php')
 
-#cookie_secret = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(30))
-cookie_secret = cfg['cookie_secret'];
 
 # escapes html special characters
 def escape(string):
@@ -45,9 +45,6 @@ def jdump(data):
 def dbcon():
     return DB().open_mysql(cfg['db_host'], cfg['db_user'], cfg['db_password'], cfg['db_name'])
 
-def set_login_cookie(username):
-    response.set_cookie("radar_login", jdump([username, datetime.now()]), secret=cookie_secret, path="/");
-
 class context:
     db = None
     access = None
@@ -61,14 +58,18 @@ class context:
 
     def __enter__(self):
         self.db = dbcon()
+        self.pid = self.db.projectid(self.project)
+        projectInfo = self.db.fetchdict("""SELECT * FROM project WHERE id = %s""", [self.pid]); 
+        if self.access == 'read' and projectInfo['is_public_viewable']:
+            return self
+
         cookie = request.get_cookie("s");
         if cookie:
             self.userid = self.pickupSession(cookie)
+            projectRights = self.db.fetchdict("""SELECT * FROM user_project WHERE project_id = %s AND user_id = %s""", [self.pid, self.userid]); 
             if not self.userid:
                 abort(401, "session invalid.")
-            self.pid = self.db.projectid(self.project)
-            projectRights = self.db.fetchdict("""SELECT * FROM user_project WHERE project_id = %s AND user_id = %s""", [self.pid, self.userid]); 
-            if self.access == 'read' and projectRights == None:
+            if self.access == 'read' and not projectInfo['is_public_viewable'] and  projectRights == None:
                 abort(401, "no read access for project.")
             if self.access == 'write' and not projectRights['can_write']:
                 abort(401, "no write access for project.")
