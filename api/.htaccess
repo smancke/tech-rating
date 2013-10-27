@@ -3,4 +3,4 @@
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*) tech-rating.py/$1 [L]
+RewriteRule ^(.*) /api/tech-rating.py/$1 [L]
