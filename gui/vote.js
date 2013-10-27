@@ -66,7 +66,7 @@ function initRatingPane(paneName) {
                     var adviceBoxId = "#rating-" + (adviceDict[item.id] ? adviceDict[item.id].advice : 'ignore');
 
                     var newItem = $('<li id="item-'+item.id+'" class="item-box">'+item['name']
-//                                    + getSVGTooltip(item, cssclass='tooltip')
+                                    + getSVGTooltip(item, cssclass='tooltip')
                                     +'</li>');
                     
                     newItem.appendTo($(adviceBoxId));
@@ -116,7 +116,7 @@ itemPane = {
                 
                 var newItem = $('<li id="item-'+item.id+'" class="" onClick="javascript:itemPane.selectItemForEdit(\''+item.id+'\')">'
                                 +'<span style="cursor: pointer;">'+ item['name']
-//                                + getSVGTooltip(item, cssclass='tooltip')
+                                + getSVGTooltip(item, cssclass='tooltip')
                                 +'</span>'
                                 +'<a href="javascript:itemPane.selectItemForEdit(\''+item.id+'\')"><img src="/gui/images/edit.png" alt="Bearbeiten"><div class="tooltip">Bearbeiten</div></a>'
                                 +'<a href="javascript:itemPane.selectItemForDelete(\''+item.id+'\', \''+item.name+'\')"><img src="/gui/images/delete.png" alt="L&ouml;schen"><div class="tooltip">L&ouml;schen</div></a>'
