@@ -115,7 +115,7 @@ function  drawRatingItem(svg, item, bubleSize) {
     var circle = svg.circle(x(position.x), y(position.y), bubleSize, 
                             {fill: '#00aa55', stroke: '#cccccc', strokeWidth: 2}); 
 
-//    $(getSVGTooltip(item, 'svgtooltip')).appendTo($(circle));
+    $(getSVGTooltip(item, 'svgtooltip')).appendTo($(circle));
 
     if (item.advices[item.maxAdvice] >= 3) {
         if (sector.x > 0) {

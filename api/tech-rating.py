@@ -32,7 +32,7 @@ def get_fullratingitems(project):
         return jdump(result);
 
 def get_ratingitem_data(cntx, project, no):
-    ratingitem = cntx.db.fetchdict("SELECT * FROM ratingitem WHERE id = %s AND project_id = %s", [no, cntx.pid]);
+    ratingitem = cntx.db.fetchdict("SELECT user.displayname, ratingitem.* FROM ratingitem, user WHERE ratingitem.creation_author = user.id AND ratingitem.id = %s AND project_id = %s", [no, cntx.pid]);
     if not ratingitem:
         abort(404, "Element not found");
     advices = cntx.db.fetchdicts("SELECT ratingitem_id, advice, count(*) as count FROM `advice` WHERE ratingitem_id = %s AND project_id = %s GROUP BY ratingitem_id, advice", [no, cntx.pid]);
@@ -108,11 +108,12 @@ def get_timeline(project):
     offset = 0
     limit = 300
     with context(project, 'read') as cntx:
-        return jdump(cntx.db.fetchdicts("""(SELECT advice.user as user, name as targetLabel, 'advice' as action, advice.advice as value, advice.creation_time as time
+        return jdump(cntx.db.fetchdicts("""SELECT user.displayname as user, innerSelect.* FROM user, ((SELECT advice.user_id as user_id, name as targetLabel, 'advice' as action, advice.advice as value, advice.creation_time as time
                                                FROM ratingitem, advice WHERE advice.ratingitem_id = ratingitem.id AND advice.project_id = %s)
                                              UNION
-                                             (SELECT creation_author as user, name as targetLabel, 'new' as action, 
-                                               'created' as value, creation_time as time FROM ratingitem WHERE ratingitem.project_id = %s)
+                                             (SELECT creation_author as user_id, name as targetLabel, 'new' as action, 
+                                               'created' as value, creation_time as time FROM ratingitem WHERE ratingitem.project_id = %s)) innerSelect
+                                             WHERE innerSelect.user_id = user.id
                                              ORDER BY time DESC
                                              LIMIT %s, %s""",
                                         [cntx.pid, cntx.pid, offset, limit]));

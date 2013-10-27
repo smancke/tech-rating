@@ -71,7 +71,7 @@ function getSVGTooltip(item, cssclass) {
         pos++;
     }
     html += '</svg>';
-    html += '<span>Vorgeschlagen: '+item.creation_author+', '+item.creation_time+'</span>';
+    html += '<span>Vorgeschlagen: '+item.displayname+', '+item.creation_time+'</span>';
     html += '</div>';
     return html;
 }
