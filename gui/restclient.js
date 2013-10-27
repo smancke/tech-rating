@@ -1,17 +1,16 @@
 
 var REST = new Object();
 REST.async = true;
-REST.prefix = '/tech-rating/server/tech-rating.py';
-REST.url_login = REST.prefix + '/rest/login';
-REST.url_logout = REST.prefix + '/rest/logout';
-REST.url_timeline = REST.prefix + '/rest/timeline';
-REST.url_createItem = REST.prefix + '/rest/ratingitem';
-REST.url_ratingitem = REST.prefix + '/rest/ratingitem';
-REST.url_fullratingitem = REST.prefix + '/rest/fullratingitem';
-REST.url_category = REST.prefix + '/rest/category';
-REST.url_advice = REST.prefix + '/rest/advice';
-REST.url_user_advices = REST.prefix + '/rest/user_advices';
-REST.url_secure = REST.prefix + '/secure';
+REST.prefix = '/api/' + global_project;  //the global_project is comming from php
+REST.url_login = REST.prefix + '/login';
+REST.url_logout = REST.prefix + '/logout';
+REST.url_timeline = REST.prefix + '/timeline';
+REST.url_createItem = REST.prefix + '/ratingitem';
+REST.url_ratingitem = REST.prefix + '/ratingitem';
+REST.url_fullratingitem = REST.prefix + '/fullratingitem';
+REST.url_category = REST.prefix + '/category';
+REST.url_advice = REST.prefix + '/advice';
+REST.url_user_advices = REST.prefix + '/user_advices';
 
 REST.logut = function() {
     REST.get(REST.url_logout, function(){}, function(){});

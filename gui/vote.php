@@ -16,7 +16,7 @@ require('base.php')
 <link rel="stylesheet" type="text/css" href="/gui/tech-rating.css">
 
 <script>
-     global_group = '<?=$_GET['group']?>';
+     global_project = '<?=$_GET['project']?>';
 </script>
 <script src="/gui/restclient.js"></script>
 <script src="/gui/vote.js"></script>

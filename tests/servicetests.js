@@ -15,24 +15,6 @@ function givenAnItem(callback) {
     },errorFunc);
 }
 
-test("I can login with valid credentials", function() {
-    REST.login(username, "debug", function() {
-        ok(true, "I got the login");
-        REST.get(REST.url_secure, function() {
-            ok(true, "I, now i got access to secure resources");
-        }, errorFunc);
-    }, errorFunc);
-});
-
-test("No login with wrong credentials", function() {
-    REST.login("debuguser", "not_valid", function() {
-        ok(false, "I should not got loged in");
-    }, function(message) {
-        ok(true, "I should not got loged in");
-        equal("Falsche Logindaten", message, "Right error message");
-    });
-});
-
 test("I can request the categories", function() {
     REST.get(REST.url_category, function(categories) {
         ok(true, "Call returned without error");

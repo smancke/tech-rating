@@ -66,7 +66,7 @@ function initRatingPane(paneName) {
                     var adviceBoxId = "#rating-" + (adviceDict[item.id] ? adviceDict[item.id].advice : 'ignore');
 
                     var newItem = $('<li id="item-'+item.id+'" class="item-box">'+item['name']
-                                    + getSVGTooltip(item, cssclass='tooltip')
+//                                    + getSVGTooltip(item, cssclass='tooltip')
                                     +'</li>');
                     
                     newItem.appendTo($(adviceBoxId));
@@ -106,7 +106,7 @@ itemPane = {
             
             for (var c in GLOBAL.categories) {
                 var cat = GLOBAL.categories[c];
-                $('<li>'+ cat.name +' <ul id="category-list-'+cat.id+'"/></li>').appendTo($("#ratingitem-list"));
+                $('<li>'+ cat.name +' <div id="category-list-'+cat.id+'"/></li>').appendTo($("#ratingitem-list"));
             }
             
             for (i in ratingitems) {
@@ -114,9 +114,9 @@ itemPane = {
                 
                 var catListId = "#category-list-" + item.category;
                 
-                var newItem = $('<li id="item-'+item.id+'" class="">'
-                                +'<span style="cursor: pointer;" onClick="javascript:itemPane.selectItemForEdit(\''+item.id+'\')">'+ item['name']
-                                + getSVGTooltip(item, cssclass='tooltip')
+                var newItem = $('<li id="item-'+item.id+'" class="" onClick="javascript:itemPane.selectItemForEdit(\''+item.id+'\')">'
+                                +'<span style="cursor: pointer;">'+ item['name']
+//                                + getSVGTooltip(item, cssclass='tooltip')
                                 +'</span>'
                                 +'<a href="javascript:itemPane.selectItemForEdit(\''+item.id+'\')"><img src="/gui/images/edit.png" alt="Bearbeiten"><div class="tooltip">Bearbeiten</div></a>'
                                 +'<a href="javascript:itemPane.selectItemForDelete(\''+item.id+'\', \''+item.name+'\')"><img src="/gui/images/delete.png" alt="L&ouml;schen"><div class="tooltip">L&ouml;schen</div></a>'

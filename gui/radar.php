@@ -16,7 +16,7 @@ require('base.php')
 <link rel="stylesheet" type="text/css" href="/gui/tech-rating.css">
 
 <script>
-     global_group = '<?=$_GET['project']?>';
+     global_project = '<?=$_GET['project']?>';
 </script>
 <script src="/gui/restclient.js"></script>
 <script src="/gui/radar.js"></script>
@@ -40,8 +40,8 @@ require('base.php')
 <?php } ?>
     <h4 style="margin-top: 2px;">&Ouml;ffentliche Ratings</h4>
     <div class="list-group">
-    <?php foreach($app->publicProjects as $project) { ?>
-       <a class="list-group-item" href="/rating/<?=$project['name']?>"><?=$project['title']?></a>
+    <?php foreach($app->publicProjects as $project) {  ?>
+       <a class="list-group-item<?= ($app->project==$project['name']) ? ' active' : ''?>" href="/rating/<?=$project['name']?>"><?=$project['title']?></a>
     <?php } ?>
     </div>
 
