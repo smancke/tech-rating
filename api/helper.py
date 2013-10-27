@@ -17,9 +17,8 @@ def readconfig(filename):
     file_data = file.read()
 
     #remove the first and the last two lines, because config is wrapped in php script
-    file_array = file_data.split("\n")[1:-2]
+    file_array = file_data.split("\n")[1:-3]
     json_data = "".join(file_array)
-
     data = loads(json_data)
     file.close()
     return data
