@@ -106,7 +106,6 @@ function getFreePosition(position, minRadius, maxRadius) {
 function  drawRatingItem(svg, item, showAllLabels, biggestAdvice) {
     //var bubleSize = 1+Math.round(2*Math.log(2+item.advices[item.maxAdvice]));
     var bubleSize = 2*(1.5+4*item.advices[item.maxAdvice]/biggestAdvice);
-    console.log(item.name +': '+ bubleSize);
     var sector = sectors[item.category];
     var g = svg.group({stroke: 'blue', strokeWidth: 1}); 
     var thisRadius = radius[item.maxAdvice].start +  ((hashCode(item.name, 60)+20)/100) *(radius[item.maxAdvice].end-radius[item.maxAdvice].start);
