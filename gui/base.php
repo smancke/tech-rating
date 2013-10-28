@@ -29,8 +29,8 @@ if (isset($_COOKIE['s'])) {
     }
 }
 
-$app->project = isset($_GET['project']) ? $_GET['project'] : '';
-if (isset($_POST['project'])) 
+$app->project = isset($_GET['project']) && $_GET['project'] ? $_GET['project'] : 'default';
+if (isset($_POST['project']) && $_POST['project']) 
     $app->project = $_POST['project'];
 if ($app->project) {
     $app->projectInfo = $userMgr->getProjectInfo($app->project);

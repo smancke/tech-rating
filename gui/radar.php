@@ -16,7 +16,7 @@ require('base.php')
 <link rel="stylesheet" type="text/css" href="/gui/tech-rating.css">
 
 <script>
-     global_project = '<?=$_GET['project']?>';
+     global_project = '<?=$app->project?>';
 </script>
 <script src="/gui/restclient.js"></script>
 <script src="/gui/radar.js"></script>

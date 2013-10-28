@@ -26,7 +26,15 @@ class UserManager {
         if ($result) {
             
             $this->userId = $result['id'];
-            $this->db->update(['last_login' => date('Y-m-d H:i:s',time())], 
+            $updateFields = ['last_login' => date('Y-m-d H:i:s',time())];
+            if ($email)
+                $updateFields['email'] = $email;
+            if ($displayName)
+                $updateFields['displayname'] = $displayName;
+            if ($imageUrl)
+                $updateFields['image_url'] = $imageUrl;
+
+            $this->db->update($updateFields, 
                               'user', 
                               ['id' => $this->userId]);
 
