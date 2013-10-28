@@ -103,8 +103,10 @@ function getFreePosition(position, minRadius, maxRadius) {
     return position;
 }
 
-function  drawRatingItem(svg, item, bubleSize) {
-    var bubleSize = 1+Math.round(2*Math.log(2+item.advices[item.maxAdvice]));
+function  drawRatingItem(svg, item, showAllLabels, biggestAdvice) {
+    //var bubleSize = 1+Math.round(2*Math.log(2+item.advices[item.maxAdvice]));
+    var bubleSize = 2*(1.5+4*item.advices[item.maxAdvice]/biggestAdvice);
+    console.log(item.name +': '+ bubleSize);
     var sector = sectors[item.category];
     var g = svg.group({stroke: 'blue', strokeWidth: 1}); 
     var thisRadius = radius[item.maxAdvice].start +  ((hashCode(item.name, 60)+20)/100) *(radius[item.maxAdvice].end-radius[item.maxAdvice].start);
@@ -117,7 +119,7 @@ function  drawRatingItem(svg, item, bubleSize) {
 
     $(getSVGTooltip(item, 'svgtooltip')).appendTo($(circle));
 
-    if (item.advices[item.maxAdvice] >= 3) {
+    if (item.advices[item.maxAdvice] >= 3 || showAllLabels) {
         if (sector.x > 0) {
             svg.text(x(position.x+(2+bubleSize)), y(position.y+3), item.name, {fontSize: 10, fontFamily: 'Arial', fill: 'black'}); 
         } else {
@@ -161,15 +163,27 @@ function loadTimeline() {
     }, errorHandler);
 }
 
+function getBiggestAdvice(itemlist) {
+    biggestAdvice = 0;
+    for (var i in itemlist) {
+        item = itemlist[i];
+        if (item.advices[item.maxAdvice] > biggestAdvice)
+            biggestAdvice = item.advices[item.maxAdvice];
+    }
+    return biggestAdvice;
+}
+
 function draw(svg) {
     allPositions = [];
     initSectors();
     drawRadar(svg);
     REST.get(REST.url_fullratingitem, function(itemlist) {
+        showAllLabels = itemlist.length < 30;
+        biggestAdvice = getBiggestAdvice(itemlist);
         for (var i in itemlist) {
             item = itemlist[i];
             if (item.maxAdvice != 'ignore') {
-                drawRatingItem(svg, item);
+                drawRatingItem(svg, item, showAllLabels, biggestAdvice);
             }
         }
         enableTooltips();        

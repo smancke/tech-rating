@@ -17,12 +17,17 @@ if (isset($_GET['code'])) {
             $userMgr->setAndCreateUserIfNotExists('google', $userTokenInfo->user_id, $userTokenInfo->email, $me->displayName, $me->image->url);
             
             // update my circle
-            $mePeople = $googleLogin->getMePeople();
-            if ($mePeople && property_exists($mePeople, 'items')) {
-                $userMgr->updateMyContacts($mePeople->items);
-            } else {
-                error_log('could not get me people for user: '.$userTokenInfo->email);
-            }
+            $mePeople = null;
+            do {
+                $mePeople = $googleLogin->getMePeople( $mePeople != null && property_exists($mePeople, 'nextPageToken') ? $mePeople->nextPageToken : null );
+                //var_dump($mePeople);
+                if ($mePeople && property_exists($mePeople, 'items')) {
+                    $userMgr->updateMyContacts($mePeople->items);
+                } else {
+                    error_log('could not get me people for user: '.$userTokenInfo->email);
+                }
+            } while (property_exists($mePeople, 'nextPageToken'));
+
             
             //create session         
             $sessionId = $userMgr->startSession();

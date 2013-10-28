@@ -70,8 +70,10 @@ class context:
                 abort(401, "session invalid.")
             if self.access == 'read' and not projectInfo['is_public_viewable'] and  projectRights == None:
                 abort(401, "no read access for project.")
-            if self.access == 'write' and not projectRights['can_write']:
+            if self.access == 'write' and not projectInfo['is_public_voteable'] and (projectRights == None or not projectRights['can_write']):
                 abort(401, "no write access for project.")
+            if self.access == 'delete' and (projectRights == None or not projectRights['can_write']):
+                abort(401, "no delete access for project.")
         else:
             abort(401, "no session found.")
         return self

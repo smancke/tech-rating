@@ -17,6 +17,7 @@ require('base.php')
 
 <script>
      global_project = '<?=$_GET['project']?>';
+     global_rigth_to_delete_ratingitems = '<?= $app->projectRights && $app->projectRights['can_write'] ?>';
 </script>
 <script src="/gui/restclient.js"></script>
 <script src="/gui/vote.js"></script>

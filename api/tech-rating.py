@@ -54,7 +54,7 @@ def get_ratingitem(project, no):
 
 @route('/<project>/ratingitem/<no>', method='DELETE')
 def delete_ratingitem(project, no):
-    with context(project, 'write') as cntx:
+    with context(project, 'delete') as cntx:
         cntx.db.execute("DELETE FROM ratingitem WHERE id = %s AND project_id = %s", [no, cntx.pid]);
         cntx.db.execute("DELETE FROM advice WHERE ratingitem_id = %s AND project_id = %s", [no, cntx.pid]);        
         return '{"status": "ok"}'

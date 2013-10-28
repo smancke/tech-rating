@@ -119,7 +119,7 @@ itemPane = {
                                 + getSVGTooltip(item, cssclass='tooltip')
                                 +'</span>'
                                 +'<a href="javascript:itemPane.selectItemForEdit(\''+item.id+'\')"><img src="/gui/images/edit.png" alt="Bearbeiten"><div class="tooltip">Bearbeiten</div></a>'
-                                +'<a href="javascript:itemPane.selectItemForDelete(\''+item.id+'\', \''+item.name+'\')"><img src="/gui/images/delete.png" alt="L&ouml;schen"><div class="tooltip">L&ouml;schen</div></a>'
+                                + (global_rigth_to_delete_ratingitems ? '<a href="javascript:itemPane.selectItemForDelete(\''+item.id+'\', \''+item.name+'\')"><img src="/gui/images/delete.png" alt="L&ouml;schen"><div class="tooltip">L&ouml;schen</div></a>' : '')
                                 +'</li>');
                 newItem.appendTo($(catListId));
                 

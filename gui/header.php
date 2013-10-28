@@ -13,7 +13,7 @@ if ($app->project) {
     </div>
     <div class="collapse navbar-collapse">
 
-<?php if ($app->projectRights['can_write']) { ?>
+<?php if ($app->projectRights['can_write'] || ($app->email && $app->projectInfo['is_public_voteable']))  { ?>
      <ul class="nav navbar-nav">
        <li><a href="/gui/vote.php?project=<?=$app->project?>"><span class="glyphicon glyphicon-play"></span> abstimmen</a></li>
        <li><a href="/rating/<?=$app->project?>"><span class="glyphicon glyphicon-eye-open"></span> radar</a></li>

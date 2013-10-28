@@ -27,6 +27,7 @@ if (isset($_POST['name'])) {
 }
 
 
+
 ?><!DOCTYPE html>
 <html>
   <head>
@@ -63,7 +64,19 @@ if ($errorMessage) {
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" name="is_public_viewable" value="1" checked> Öffentlich sichtbar
+    <input type="checkbox" name="is_public_viewable" value="1"<?=(isset($_POST['title']) && $_POST['is_public_viewable'] != 1) ? '' : ' checked'?>> Öffentlich sichtbar
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+    <input type="radio" name="is_public_voteable" value="1"<?=!isset($_POST['is_public_voteable']) || (isset($_POST['is_public_voteable']) && $_POST['is_public_voteable'] == 1) ? ' checked' : ''?>>
+            Alle angemeldeten Benutzer können abstimmen
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="is_public_voteable" value="0"<?=(isset($_POST['is_public_voteable']) && $_POST['is_public_voteable'] != 1) ? ' checked' : ''?>>
+            Nur ausgewählte Benutzer können abstimmen
           </label>
         </div>
         <br />
