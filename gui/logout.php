@@ -1,10 +1,11 @@
 <?php
 
 require 'base.php';
+require_once 'SimpleOAuthLogin/LoginHandler.php';
 
-if (isset($_COOKIE['s'])) {
-    $userMgr->invalidateSession($_COOKIE['s']);
-}
+$loginHandler = new LoginHandler(null);
+$loginHandler->logout($userMgr);
+
 Header('Location: /rating');
 
 ?>

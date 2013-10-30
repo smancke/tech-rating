@@ -1,66 +1,24 @@
 <?php
 
 require 'base.php';
-require_once 'SimpleOAuthLogin/SimpleGoogleLogin.php';
+require_once 'SimpleOAuthLogin/GoogleLoginProvider.php';
+require_once 'SimpleOAuthLogin/LoginHandler.php';
 
-$googleLogin = new SimpleGoogleLogin((array)$cfg->google);
+$googleLogin = new GoogleLoginProvider((array)$cfg->google);
+$loginHandler = new LoginHandler($googleLogin);
 
-$errorMessage = '';
+if (isset($_GET['code']) 
+    && $loginHandler->login()
+    && $loginHandler->ensureUserAndStartSession($userMgr)
+    && $loginHandler->updateMyCircles($userMgr)
+    ) {
 
-if (isset($_GET['code'])) {
-
-    $loginInfo = isset($_COOKIE['l']) ? json_decode($_COOKIE['l']) : [];
-
-    if (isset($_GET['state']) 
-        && $loginInfo->state == $_GET['state']) {
-
-        if ($googleLogin->exchangeAuthCode($_GET['code'])) {
-            
-            $userTokenInfo = $googleLogin->getTokenInfo();
-            $me = $googleLogin->getMe();
-            
-            if (property_exists($userTokenInfo, 'email')) {         
-                $userMgr->setAndCreateUserIfNotExists('google', $userTokenInfo->user_id, $userTokenInfo->email, $me->displayName, $me->image->url);
-                
-                // update my circle
-                $mePeople = null;
-                do {
-                    $mePeople = $googleLogin->getMePeople( $mePeople != null && property_exists($mePeople, 'nextPageToken') ? $mePeople->nextPageToken : null );
-                    //var_dump($mePeople);
-                    if ($mePeople && property_exists($mePeople, 'items')) {
-                        $userMgr->updateMyContacts($mePeople->items);
-                    } else {
-                        error_log('could not get me people for user: '.$userTokenInfo->email);
-                    }
-                } while (property_exists($mePeople, 'nextPageToken'));
-                
-                
-                //create session         
-                $sessionId = $userMgr->startSession();
-                setcookie('s', $sessionId, 0, '/');
-                
-                $myProjects = $userMgr->getMyProjects();
-                
-                if (isset($loginInfo->nextAction)) {
-                    Header('Location: '.$loginInfo->nextAction);
-                } else if (count($myProjects) > 0) {
-                    Header('Location: /rating/'.$myProjects[0]['name']);
-                } else {
-                    Header('Location: /rating');
-                }
-                die();
-            } else {
-                // todo log login problems
-                $errorMessage = '<h1>Error on google sign in.</h1>(Could not get user info)';
-            }
-        } else {
-            // todo log login problems
-            $errorMessage = '<h1>Error on google sign in.</h1>(Could not get access_token)';
-        }
-    } else {
-        $errorMessage = '<h1>Error on google sign in.</h1>(Could not verify state parameter)';
-    }
+    Header('Location: '.$loginHandler->getNextAction('/rating'));
+    die();
+} else {
+    $errorMessage = $loginHandler->getError();
 }
+
 
 ?><!DOCTYPE html>
 <html>
