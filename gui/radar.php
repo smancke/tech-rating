@@ -30,7 +30,7 @@ require('base.php')
   <div id="radar" style="width: 800px; height: 800px; padding: 0 auto; border: 0px solid #000000; float:left;"></div> 
 
   <div class="well" style="width: 300px; margin: 0px 0px 20px 30px; padding: 5px; float:left;">
-    <a href="/gui/loginRedirect.php?nextAction=/gui/createRating.php"><span class="glyphicon glyphicon-arrow-right"></span> Eigenes Rating erstellen</a>
+    <a href="/gui/createRating.php"><span class="glyphicon glyphicon-arrow-right"></span> Eigenes Rating erstellen</a>
   </div>
   <div class="well" style="width: 300px; margin: 0px 0px 20px 30px; padding: 5px; float:left;">
 <?php if (count($app->myProjects)>0) {?>

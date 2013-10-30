@@ -2,6 +2,11 @@
 
 require 'base.php';
 
+if (! $app->email) {
+    Header('Location: '. '/gui/loginRedirect.php?nextAction=/gui/createRating.php');
+    die();
+}
+
 $errorMessage = '';
 
 function isNameValid() {
