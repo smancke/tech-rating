@@ -2,7 +2,7 @@
 date_default_timezone_set("Europe/Berlin");
 require_once '../config.php';
 require 'dbFacile/dbFacile_mysql.php';
-require 'UserManager.php';
+require 'SimpleOAuthLogin/UserManager.php';
 
 class App {
     public $project = '';
