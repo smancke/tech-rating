@@ -29,7 +29,10 @@ require('base.php')
 <div id="content-root" class="tab-pane" style="height: 100%;">  
   <div id="radar" style="width: 800px; height: 800px; padding: 0 auto; border: 0px solid #000000; float:left;"></div> 
 
-  <div class="well" style="width: 300px; margin: 0px 0px 20px 30px; padding: 3px; float:left;">
+  <div class="well" style="width: 300px; margin: 0px 0px 20px 30px; padding: 5px; float:left;">
+    <a href="/gui/loginRedirect.php?nextAction=/gui/createRating.php"><span class="glyphicon glyphicon-arrow-right"></span> Eigenes Rating erstellen</a>
+  </div>
+  <div class="well" style="width: 300px; margin: 0px 0px 20px 30px; padding: 5px; float:left;">
 <?php if (count($app->myProjects)>0) {?>
     <h4 style="margin-top: 2px;">Meine Ratings</h4>
     <div class="list-group">
@@ -48,7 +51,7 @@ require('base.php')
   </div>
 <br>
 <?php if ($app->showTimeline) { ?>
-  <div id="timeline" class="well" style="width: 300px; height: 400px; margin: 0px 0px 20px 30px; padding: 3px; float:left;">
+  <div id="timeline" class="well" style="width: 300px; height: 400px; margin: 0px 0px 20px 30px; padding: 5px; float:left;">
     <h4 style="margin-top: 2px;">Letzte Ereignisse</h4>
     <div id="timeline-content" style="overflow: auto; width: 290px; height: 350px; overflow-x: hidden;"/>
   </div>

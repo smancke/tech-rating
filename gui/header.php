@@ -18,7 +18,7 @@ if ($app->project) {
        <li><a href="/gui/vote.php?project=<?=$app->project?>"><span class="glyphicon glyphicon-play"></span> abstimmen</a></li>
        <li><a href="/rating/<?=$app->project?>"><span class="glyphicon glyphicon-eye-open"></span> radar</a></li>
        <?php if ($app->projectRights['is_owner']) { ?>
-         <li><a href="/gui/manage.php?project=<?=$app->project?>"><span class="glyphicon glyphicon-user"></span> user verwalten</a></li>
+         <li><a href="/gui/manage.php?project=<?=$app->project?>"><span class="glyphicon glyphicon-user"></span> benutzer verwalten</a></li>
        <?php } ?>
 
      </ul>
@@ -26,7 +26,7 @@ if ($app->project) {
 
 <?php if (! $app->email) { ?>
       <div class="navbar-right">
-          <a href="<?=createGoogleLoginLink()?>"><img style="margin-top: 4px;" src="/gui/images/google-sign-in.png"/></a>';
+          <a href="/gui/loginRedirect.php"><img style="margin-top: 4px;" src="/gui/images/google-sign-in.png"/></a>';
       </div>
 <?php } ?>
 

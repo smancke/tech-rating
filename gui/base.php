@@ -45,11 +45,4 @@ function cfg_basepath() {
     return $cfg['basepath'];
 }
 
-function createGoogleLoginLink() {
-    global $cfg;
-    require_once 'SimpleOAuthLogin/SimpleGoogleLogin.php';
-    $googleLogin = new SimpleGoogleLogin((array)$cfg->google);
-    return $googleLogin->getAuthUrl(true);
-}
-
 ?>
