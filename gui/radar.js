@@ -158,7 +158,7 @@ function loadTimeline() {
         }
         if (currentElement)
             currentElement.appendTo(timelineElement);
-        window.setTimeout("loadTimeline()", 10000);
+        window.setTimeout("loadTimeline()", 5 * 60 * 1000); // refresh every 5 minutes
     }, errorHandler);
 }
 
