@@ -19,21 +19,27 @@ Prerequirements:
 
 1. Enable your web server to serve python cgi scripts.
 e.g. for apache add the following directives at the right place
-     Options +ExecCGI
-     AddHandler cgi-script .cgi .pl .py 
-
+```
+Options +ExecCGI
+AddHandler cgi-script .cgi .pl .py
+```
 On my ubuntu this is: /etc/apache2/sites-enabled/000-default.conf
-      <Directory /var/www/>
-        Options +Indexes +ExecCGI +FollowSymLinks +MultiViews
-	AddHandler cgi-script .cgi .pl .py 
-        ...
-      </Directory>
+```
+<Directory /var/www/>
+  Options +Indexes +ExecCGI +FollowSymLinks +MultiViews
+  AddHandler cgi-script .cgi .pl .py 
+  ...
+</Directory>
+```
 
 2. Checkout all the files in the root directory of your apache
 
+
 3. create a mysql database and execute the sql scripts:
-   mysql_schema.sql
-   mysql_base_data.sql
+```
+mysql_schema.sql
+mysql_base_data.sql
+```
 
 4. copy config.template.php to config.php
 and fill out the configuration.
