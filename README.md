@@ -3,36 +3,39 @@ tech-rating
 
 tech-rating is a technology rating web platform. The idea was taken from the Thoughtworks Technology Radar [1]. But the tech-rating approach helps to manage this is a more democratic way.
 
-You can find a description and some screenshot at: http://smanck.blog.tarent.de/2013/05/23/techrating-application/
+You can find a live installation at http://techrating.org
 
 
-Installation using wsgi and apache2
-====================================
+Installation 
+=============
+Installation is very easy.
 
-WSGI is the python standard interface for web applications. You should use this for a production environment
+Prerequirements:
+- A web server
+- PHP5
+- Python (configured as CGI, see below)
+- mySQL 
 
-1) Install the apache module:
-> sudo apt-get install libapache2-mod-wsgi
 
-2) checkout techrating e.g.:
-> cd /var/www
-> git clone https://github.com/smancke/tech-rating.git
+1. Enable your web server to serve python cgi scripts.
+e.g. for apache add the following directives at the right place
+     Options +ExecCGI
+     AddHandler cgi-script .cgi .pl .py 
 
-3a) Copy the config
-> cp ./tech-rating/server/democonfig_mysql.json to /etc/techrating.conf
+On my ubuntu this is: /etc/apache2/sites-enabled/000-default.conf
+      <Directory /var/www/>
+        Options +Indexes +ExecCGI +FollowSymLinks +MultiViews
+	AddHandler cgi-script .cgi .pl .py 
+        ...
+      </Directory>
 
-3b) Edit the config values
-> vi /etc/techrating.conf
+2. Checkout all the files in the root directory of your apache
 
-4) Create a mysql database and execute
-> python ./tech-rating/server/create_schema.py
+3. create a mysql database and execute the sql scripts:
+   mysql_schema.sql
+   mysql_base_data.sql
 
-5) Edit the apache site configuration
-> vi /etc/apache2/sites-enabled/000-default
-
-6) Insert the following at the end:
-WSGIDaemonProcess wsgi user=www-data group=www-data processes=1 threads=10 python-path=/var/www/tech-rating/server
-WSGIScriptAlias / /var/www/tech-rating/server/tech-rating.py
-
-7) Reload the apache config:
-> sudo service apache2 reload
+4. copy config.template.php to config.php
+and fill out the configuration.
+(Retain the format of the configuration, 
+because the parsing from python is currently not very robust.)

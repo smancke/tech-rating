@@ -31,9 +31,9 @@ CREATE TABLE `advice` (
   PRIMARY KEY (`ratingitem_id`,`user_id`,`project_id`),
   KEY `user_id` (`user_id`),
   KEY `project_id` (`project_id`),
-  CONSTRAINT `advice_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
   CONSTRAINT `advice_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `advice_ibfk_2` FOREIGN KEY (`ratingitem_id`) REFERENCES `ratingitem` (`id`) ON DELETE CASCADE
+  CONSTRAINT `advice_ibfk_2` FOREIGN KEY (`ratingitem_id`) REFERENCES `ratingitem` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `advice_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -147,8 +147,8 @@ CREATE TABLE `user_project` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`,`project_id`),
   KEY `project_id` (`project_id`),
-  CONSTRAINT `user_project_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `user_project_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+  CONSTRAINT `user_project_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `user_project_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -166,8 +166,8 @@ CREATE TABLE `user_user` (
   KEY `self_id` (`self_id`,`friend_id`),
   KEY `self_id_2` (`self_id`),
   KEY `friend_id` (`friend_id`),
-  CONSTRAINT `user_user_ibfk_2` FOREIGN KEY (`friend_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `user_user_ibfk_1` FOREIGN KEY (`self_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+  CONSTRAINT `user_user_ibfk_1` FOREIGN KEY (`self_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `user_user_ibfk_2` FOREIGN KEY (`friend_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -180,5 +180,5 @@ CREATE TABLE `user_user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-28 23:34:07
+-- Dump completed on 2013-11-01 20:40:22
 Scan right index finger on UPEK Eikon 2
