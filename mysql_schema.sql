@@ -181,4 +181,3 @@ CREATE TABLE `user_user` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2013-11-01 20:40:22
-Scan right index finger on UPEK Eikon 2
