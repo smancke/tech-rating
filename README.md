@@ -35,6 +35,10 @@ On my ubuntu this is: /etc/apache2/sites-enabled/000-default.conf
 ```
 
 2. Checkout all the files in the root directory of your apache
+```
+git clone --recursive https://github.com/smancke/tech-rating.git 
+```
+(if you copy things arround, be aware of the hidden .htaccess files)
 
 
 3. create a mysql database and execute the sql scripts:
@@ -44,6 +48,20 @@ mysql_base_data.sql
 ```
 
 4. copy config.template.php to config.php
-and fill out the configuration.
+and fill out the database configuration.
 (Retain the format of the configuration, 
 because the parsing from python is currently not very robust.)
+
+5. login with demo user
+
+  Go to http://your_host/gui/demoLogin.php
+  and login with 'secret' as password.
+
+  Now everything should work fine!
+
+
+6. Configure login with google:
+  - Register your application within the google api console (https://code.google.com/apis/console/)
+  - Change the google parameters within the config.php
+  - change demo\_login\_enabled to 'false'
+  - delete the file ./gui/demoLogin.php 
