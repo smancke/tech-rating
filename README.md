@@ -11,10 +11,12 @@ Installation
 Installation is very easy.
 
 Prerequirements:
-- A web server
-- PHP5
-- Python (configured as CGI, see below)
-- mySQL 
+- A web server (e.g. tested with apache v2.4.6)
+- apache mod_rewrite enabled
+- PHP5 (tested with v5.5.3)
+- Python (configured as CGI, see below) (tested with v2.7.5 and v2.6.6)
+- mySQL (tested with v5.5.32)
+Older versions of the software should work as well
 
 
 1. Enable your web server to serve python cgi scripts.
