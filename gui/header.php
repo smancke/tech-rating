@@ -51,7 +51,13 @@ if ($app->project) {
           </li>          
 
           <li class="dropdown">
-            <a style="padding: 0px;" class="dropdown-toggle" data-toggle="dropdown" href="#"><img style="padding:0px; margin:0px; height:40px; width:40px;" src="<?=$app->userInfo['image_url']?>" title="<?=$app->userInfo['displayname']?>"> <span class="caret"></span></a>
+            <a style="padding: 0px;" class="dropdown-toggle" data-toggle="dropdown" href="#">
+<?php if ($app->userInfo['image_url']): ?>
+  <img style="padding:0px; margin:0px; height:40px; width:40px;" src="<?=$app->userInfo['image_url']?>" title="<?=$app->userInfo['displayname']?>"> 
+<?php else: ?>
+  <span style="padding:10px;" class="glyphicon glyphicon-user" title="<?=$app->userInfo['displayname']?>"></span>
+<?php endif ?>
+            <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="/gui/createRating.php"><span class="glyphicon glyphicon-star"></span> techrating anlegen</a></li>
               <li><a href="/gui/logout.php"><span class="glyphicon glyphicon-ban-circle"></span> Logout</a></li>

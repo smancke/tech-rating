@@ -33,6 +33,9 @@ $contactRights = $userMgr->getMyContactsRights($app->projectInfo['id']);
     <br>
     <div class="well" style="width: 800px; margin: auto">
       <h3>Berechtigungen verwalten: <?=$app->projectInfo['title']?></h3>
+<?php if(!count($contactRights)): ?>
+      <p>Keine verbundenen Benutzer vorhanden</p>
+<?php else: ?>
       <form action="/gui/manage.php" method="POST" role="form">
         <input type="hidden" name="project" value="<?=$app->project?>">
         <input type="hidden" name="form_sent" value="1">
@@ -52,7 +55,7 @@ $contactRights = $userMgr->getMyContactsRights($app->projectInfo['id']);
             </tr>
           </thead>
           <tbody>
-<?php foreach ($contactRights as $contact) { ?>
+  <?php foreach ($contactRights as $contact) { ?>
           <tr>
     <?php if (! $app->projectInfo['is_public_viewable']): ?>
             <td align="center"><input type="checkbox" name="rights[<?=$contact['id']?>][]" value="can_read"<?=($contact['project_id']) ? ' checked' : ''?>></td> 
@@ -64,11 +67,12 @@ $contactRights = $userMgr->getMyContactsRights($app->projectInfo['id']);
             <td><img width="40" height="40" src="<?=$contact['image_url']?>"></td>
             <td><strong><?=$contact['displayname']?></strong></td>
           </tr>
-<?php } ?>
+  <?php } ?>
           <tbody>
         </table>
         <input type="submit" value="Speichern" class="btn btn-default">
       </form>
+<?php endif ?>
     </div>
       <br>
       <br>

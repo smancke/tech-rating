@@ -7,6 +7,9 @@
     "db_name": "techratingdb",
     "db_logfile": "",
 
+    "demo_login_enabled": true,
+    "demo_login_password": "secret",
+
     "google": {
         "client_id": "your-client-id.apps.googleusercontent.com",
         "client_secret": "your-client-secret-sdccerferfg",
