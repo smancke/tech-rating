@@ -59,12 +59,15 @@ class context:
         self.db = dbcon()
         self.pid = self.db.projectid(self.project)
         projectInfo = self.db.fetchdict("""SELECT * FROM project WHERE id = %s""", [self.pid]); 
-        if self.access == 'read' and projectInfo['is_public_viewable']:
-            return self
 
         cookie = request.get_cookie("s");
         if cookie:
             self.userid = self.pickupSession(cookie)
+
+        if self.access == 'read' and projectInfo['is_public_viewable']:
+            return self
+
+        if self.userid:
             projectRights = self.db.fetchdict("""SELECT * FROM user_project WHERE project_id = %s AND user_id = %s""", [self.pid, self.userid]); 
             if not self.userid:
                 abort(401, "session invalid.")
@@ -81,7 +84,10 @@ class context:
     def pickupSession(self, sessionid):
         # todo: check expiration date
         session = self.db.fetchdict("""SELECT * FROM session WHERE sessionid = %s""", [sessionid]); 
-        return session['user_id']
+        if session:
+            return session['user_id']
+        else:
+            return False;
 
     def __exit__(self, type, value, traceback):
         self.db.close()

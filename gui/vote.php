@@ -6,7 +6,7 @@ require('base.php')
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Tech Rating - <?=$app->group?></title>
+<title>Tech Rating <?=$app->project ? '- '.$app->projectInfo['title'] : '' ?></title>
 <script src="/lib/jquery.js"></script>
 <script src="/lib/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/lib/jquery.svg.js"></script>

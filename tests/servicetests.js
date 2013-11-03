@@ -1,10 +1,28 @@
 
-var username = "debuguser";
+var username = "demo";
 REST.async = false;
 
 var errorFunc = function(message) {
     ok(false, "error calling REST service: "+ message);
 }
+
+module("module1", {
+  setup: function() {
+      // login with demo user
+      $.ajax({
+          url: "../gui/demoLogin.php",
+          type: "POST",
+          data: "demo_login_password=secret",
+          async: false,
+      }).always(function(data, textStatus, jqXHR) { 
+          if (jqXHR.status != 200) {
+              ok(false, "error on login "+ textStatus +", "+jqXHR.status);
+          }
+      });      
+  }
+});
+
+
 
 function givenAnItem(callback) {
     var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "cat_1"}
@@ -34,30 +52,31 @@ test("I can create and read an item", function() {
                          equal(item["description"], resultItem["description"], "description given");
                          equal(item["category"], resultItem["category"], "category given");
                          ok(resultItem["id"] !== undefined, "id given");
-                         equal(resultItem["creation_author"], "debuguser");
+                         ok(resultItem["creation_author"] > 0, "author id given");
                          ok(resultItem["creation_time"].length > 1, "creation_time given");
                      },errorFunc);
                      
                  },errorFunc);
 });
 
-test("I can create and delete an item", function() {
-    var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "cat_1"}
-    REST.createItem(item, 
-                 function(locationURI) {
-                     ok(locationURI.length > 10, "passed call and got an location String > 10 characters: "+ locationURI);
-
-                     REST.delete(locationURI, function(resultItem) {
-                         REST.get(locationURI, function(resultItem) {
-                             ok(false, "We should not get this item any more");
-                         },function(error, status) {
-                             ok(true, "We expact an error here");
-                             equal(404, status, "The status should be 404");
-                             console.log("status: "+status);
-                         });
-                     },errorFunc);                     
-                 },errorFunc);
-});
+// TODO: Implement test for deletion (not possible on 'default'-project
+//test("I can create and delete an item", function() {
+//    var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "cat_1"}
+//    REST.createItem(item, 
+//                 function(locationURI) {
+//                     ok(locationURI.length > 10, "passed call and got an location String > 10 characters: "+ locationURI);
+//
+//                     REST.delete(locationURI, function(resultItem) {
+//                         REST.get(locationURI, function(resultItem) {
+//                             ok(false, "We should not get this item any more");
+//                         },function(error, status) {
+//                             ok(true, "We expact an error here");
+//                             equal(404, status, "The status should be 404");
+//                             console.log("status: "+status);
+//                         });
+//                     },errorFunc);                     
+//                 },errorFunc);
+//});
 
 test("I can modify an item", function() {
     givenAnItem(function(item) {
@@ -96,7 +115,7 @@ test("I can create and read an advice", function() {
 
             REST.get(locationURI, function(resultAdvice) {
                 equal(itemlist[0].id, resultAdvice["ratingitem_id"], "correct id");
-                equal(username, resultAdvice["user"], "correct user");
+                ok(resultAdvice["user_id"] > 0, "user id given");
                 equal('hold', resultAdvice["advice"], "correct advice string");
                 ok(resultAdvice["creation_time"], "a creation time is set");
             },errorFunc);
