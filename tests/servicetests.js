@@ -25,7 +25,7 @@ module("module1", {
 
 
 function givenAnItem(callback) {
-    var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "cat_1"}
+    var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "test"}
     REST.createItem(item, function(locationURI) {
         REST.get(locationURI, function(resultItem) {
             callback(resultItem);
@@ -42,7 +42,7 @@ test("I can request the categories", function() {
 });
 
 test("I can create and read an item", function() {
-    var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "cat_1"}
+    var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "test"}
     REST.createItem(item, 
                  function(locationURI) {
                      ok(locationURI.length > 10, "passed call and got an location String > 10 characters: "+ locationURI);
@@ -61,7 +61,7 @@ test("I can create and read an item", function() {
 
 // TODO: Implement test for deletion (not possible on 'default'-project
 //test("I can create and delete an item", function() {
-//    var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "cat_1"}
+//    var item = {"name": "neues Item", "description": "lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..lorem ipsum ..", "category": "test"}
 //    REST.createItem(item, 
 //                 function(locationURI) {
 //                     ok(locationURI.length > 10, "passed call and got an location String > 10 characters: "+ locationURI);
@@ -83,7 +83,7 @@ test("I can modify an item", function() {
         // when I change the values of the item
         item.name = "New Name";
         item.description = "New Description";
-        item.category = "new_cat";
+        item.category = "test";
         REST.updateItem(item, function() {
             ok(true, "updateItem called");
 

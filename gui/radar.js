@@ -182,7 +182,13 @@ function draw(svg) {
         for (var i in itemlist) {
             item = itemlist[i];
             if (item.maxAdvice != 'ignore') {
-                drawRatingItem(svg, item, showAllLabels, biggestAdvice);
+                try {
+                    drawRatingItem(svg, item, showAllLabels, biggestAdvice);
+                }
+                catch(err)
+                {
+                    console.log("error while drawing item %o", err)
+                }
             }
         }
         enableTooltips();        
