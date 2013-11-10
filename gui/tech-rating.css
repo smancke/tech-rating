@@ -1,18 +1,17 @@
-
-body {  
+body {
    background: #ffffff;  
 }
 .rating-box > h4 {
   margin: 5px 5px 5px 10px;
 }
 p {
-       margin: 2px 0px 2px 0px;
+       margin: 2px 0 2px 0;
 }
 
 .text-box {
 	border: 2px solid #CC0000;
         background: #ebf0eb;
-        font-family: arial;
+        font-family: arial, sans-serif;
 	color: #555555;
         padding: 15px;
         margin: 5px;
@@ -32,7 +31,7 @@ p {
   border-radius: 5px 5px 5px 5px;
   padding: 3px;
   font-size: small;
-  font-family: arial;
+  font-family: arial, sans-serif;
   font-weight: normal;
   max-width: 310px;
 }
@@ -43,7 +42,7 @@ p {
   color: #CC0000;
   padding: 5px;
   border-radius: 5px 5px 5px 5px;
-  font-family: arial;
+  font-family: arial, sans-serif;
 }
 
 .error-message {
@@ -52,13 +51,13 @@ p {
   color: #dd0000;
   padding: 5px;
   border-radius: 5px 5px 5px 5px;
-  font-family: arial;
+  font-family: arial, sans-serif;
 }
 
 /* ------ forms ------------- */
 .formrow {
   clear: both;
-  padding: 2px 0px;
+  padding: 2px 0;
 }
 .label {
   float: left;
@@ -81,14 +80,14 @@ p {
        width: 97%;
        height: 600px;
        clear: both;
-       border-radius: 0px 5px 5px 5px;
+       border-radius: 0 5px 5px 5px;
 }
 
 /* -------- timeline elements ----------- */
 .timeline-event {
 	border: 1px solid #cccccc;
         background: #eef5ee;
-        font-family: arial;
+        font-family: arial, sans-serif;
 	color: #555555;
         border-radius:3px;
         margin-bottom: 5px;        
@@ -108,7 +107,7 @@ p {
 .item-box {
 	border: 1px solid #CC0000;
         background: #ffffff;
-        font-family: arial;
+        font-family: arial, sans-serif;
         border-radius:2px;
         cursor: pointer;
         margin: 0 5px 5px 5px; padding: 5px;
@@ -127,14 +126,13 @@ p {
         float: left;         
 	border: 1px solid #ebebeb;
         background: #ffffff;
-        font-family: arial;
+        font-family: arial, sans-serif;
         -moz-box-shadow: 3px 3px 2px #888;
         -webkit-box-shadow: 7px 7px 5px #888;
         box-shadow: 3px 3px 2px #ebebeb;
 }
-.rating-box > ul { 
-        margin: auto;
-        list-style-type: none; margin: 0px; padding: 0; 
+.rating-box > ul {
+        list-style-type: none; margin: 0; padding: 0;
         width: 100%;
         overflow: auto;
         overflow-x: hidden;
@@ -142,8 +140,7 @@ p {
 
 /* -------- create item page ----------- */
 #ratingitem-list {
-        margin: auto;
-        list-style-type: none; margin: 0px; padding: 0; 
+        list-style-type: none; margin: 0; padding: 0;
         overflow: auto;
         overflow-x: hidden;
 }
@@ -153,7 +150,7 @@ ul {
 #ratingitem-list > li {
        display: block;
        font-size: 1.2em;
-       font-family: arial;
+       font-family: arial, sans-serif;
        font-weight:bold;
 }
 #ratingitem-list li li {

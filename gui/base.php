@@ -11,8 +11,8 @@ class App {
     public $email = '';
     public $userInfo = '';
     public $showTimeline = true;
-    public $publicProjects = '';
-    public $myProjects = '';
+    public $publicProjects = [];
+    public $myProjects = [];
 }
 $app = new App();
 
@@ -30,7 +30,7 @@ if (isset($_COOKIE['s'])) {
 }
 
 $app->project = isset($_GET['project']) && $_GET['project'] ? $_GET['project'] : 'default';
-if (isset($_POST['project']) && $_POST['project']) 
+if (isset($_POST['project']) && $_POST['project'])
     $app->project = $_POST['project'];
 if ($app->project) {
     $app->projectInfo = $userMgr->getProjectInfo($app->project);
@@ -40,9 +40,21 @@ if ($app->project) {
 $app->publicProjects = $userMgr->getPublicProjects();
 $app->myProjects = $userMgr->getMyProjects();
 
-function cfg_basepath() {
+function cfg_basepath()
+{
     global $cfg;
     return $cfg['basepath'];
 }
 
-?>
+// translation see http://mel.melaxis.com/devblog/2005/08/06/localizing-php-web-sites-using-gettext/
+$locale = "en_US.utf8";
+$domain = "messages";
+putenv("LANG=" . $locale);
+setlocale(LC_ALL, $locale);
+bindtextdomain($domain, dirname(__FILE__) . '/locale');
+bind_textdomain_codeset($domain, 'UTF-8');
+textdomain($domain);
+
+// attention - locales need to be installed on OS!
+// > locale -a
+// sudo apt-get install language-pack-fi-base

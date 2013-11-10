@@ -1,0 +1,272 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TechRating\n"
+"POT-Creation-Date: 2013-11-07 18:03+0100\n"
+"PO-Revision-Date: 2013-11-07 18:03+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: /Users/stefanweber/Code/TechRating/tech-rating/gui\n"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createItem-pane.php:10
+msgid "Neuer Vorschlag ..."
+msgstr "Add Technology"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createItem-pane.php:16
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createRating.php:60
+msgid "Name:"
+msgstr "Name:"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createItem-pane.php:18
+msgid "Bitte einen kurzen sprechenden Namen verwenden."
+msgstr "Use a short descriptive name"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createItem-pane.php:21
+msgid "Beschreibung:"
+msgstr "Description:"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createItem-pane.php:23
+msgid "Kurze Beschreibung in Deutsch eingeben."
+msgstr "Enter a short deschription."
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createItem-pane.php:26
+msgid "Themenbereich:"
+msgstr "Quadrant:"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createItem-pane.php:28
+msgid "Bitte einen Themenbereich ausw&auml;hlen."
+msgstr "Please select a Quadrant."
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createItem-pane.php:31
+msgid "Speichern"
+msgstr "Save"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createItem-pane.php:33
+msgid "Zur&uuml;cksetzen"
+msgstr "Cancel"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createRating.php:39
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createRating.php:56
+msgid "Techrating anlegen"
+msgstr "Create a new Technology Rating"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createRating.php:61
+msgid "z.B. projektgruppe42"
+msgstr "e.g. group42"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createRating.php:65
+msgid "Titel:"
+msgstr "Title:"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createRating.php:66
+msgid "z.B. Rating der Projektgruppe 42"
+msgstr "e.g. Group 42's ratings"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createRating.php:73
+msgid "&Ouml;ffentlich sichtbar"
+msgstr "Visible to the public"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createRating.php:80
+msgid "Alle angemeldeten Benutzer k&ouml;nnen abstimmen"
+msgstr "All logged-in users can vote"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createRating.php:87
+msgid "Nur ausgew&auml;hlte Benutzer k&ouml;nnen abstimmen"
+msgstr "Only select users can vote"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/createRating.php:91
+msgid "Anlegen"
+msgstr "Add"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/demoLogin.php:8
+msgid "Demo Login ist nicht aktiviert!"
+msgstr "Demo login is not enabled!"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/demoLogin.php:22
+msgid "Demo Passwort ist falsch"
+msgstr "Demo password is wrong!"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/demoLogin.php:30
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/login.php:26
+msgid "Tech Rating - Login"
+msgstr "Technology Rating - Login"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/demoLogin.php:54
+msgid "Passwort"
+msgstr "Password"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/header.php:8
+msgid "Techrating"
+msgstr "Technology Rating"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/header.php:18
+msgid "abstimmen"
+msgstr "Vote"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/header.php:19
+msgid "radar"
+msgstr "Radar"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/header.php:21
+msgid "Benutzer verwalten"
+msgstr "Manage users"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/header.php:29
+msgid "Login"
+msgstr "Login"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/header.php:39
+msgid "&ouml;ffentliche ratings"
+msgstr "Public ratings"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/header.php:48
+msgid "meine ratings"
+msgstr "My ratings"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/header.php:66
+msgid "techrating anlegen"
+msgstr "Create a new rating "
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/header.php:67
+msgid "Logout"
+msgstr "Logout"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/radar.php:9
+msgid "Tech Rating "
+msgstr "Technology Rating"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/radar.php:33
+msgid "Eigenes Rating erstellen"
+msgstr "Create own rating"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/radar.php:37
+msgid "Meine Ratings"
+msgstr "My ratings"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/radar.php:44
+msgid "&Ouml;ffentliche Ratings"
+msgstr "Public ratings"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/radar.php:55
+msgid "Letzte Ereignisse"
+msgstr "Event history"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:4
+msgid "Ignorieren"
+msgstr "Ignore"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:5
+msgid ""
+"<b>Nicht bewertet:</b> Vorschl&auml;ge, die nicht bewertet wurden gelten als "
+"weniger\n"
+"                relevant. Bitte lasse alle Technologien, die Du unwichtig "
+"findest oder zu denen Du keine klare Meinung\n"
+"                hast in dieser Box!"
+msgstr ""
+"Items that have not been rated yet or are considered irrelevant.Please do "
+"not rate items if you have no knowledge and/or opinion on them."
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:15
+msgid "Einf&uuml;hren"
+msgstr "Adopt"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:16
+msgid ""
+"<b>Einf&uuml;hren:</b> Vorschl&auml;ge, die noch nicht oder nur vereinzelt "
+"verwendet\n"
+"                werden, aber deren breite Nutzung anzustreben ist."
+msgstr ""
+"AdoptFor technologies in the adopt ring, we feel strongly that the industry "
+"should be adopting these items. We use them where appropriate on our "
+"projects; as close to a “no brainer” as possible.We were trying to come up "
+"with a good criteria for when something should plainly be in adopt, and my "
+"colleague Mike Mason developed what we call Mason’s Razor: for any of the "
+"technologies in the adopt ring, I will make fun of you at the pub if you "
+"aren’t using them. A recent addition is Mason’s Second Law: suspect anything "
+"that you want to move directly into adopt – do you really understand it well "
+"enough?"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:25
+msgid "Testweise einsetzen"
+msgstr "Trial"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:26
+msgid ""
+"<b>Testweise einsetzen:</b> Vorschl&auml;ge die so interessant und Risikoarm "
+"sind, dass\n"
+"                sie bereits vorsichtig und testweise eingesetzt werden "
+"sollten (insbesondere in nicht kritischen\n"
+"                Komponenten)."
+msgstr ""
+"TrialThe trial ring is for technologies you (and/or your peers) have decided "
+"are worth pursuing. It is important to understand how to build up this "
+"capability. Now is the time to pilot a low-risk project to “get dirty” with "
+"the technology so that you can really understand it. We wanted an objective "
+"criteria for ThoughtWorks to move something from assess totrial, and we "
+"decided the litmus test is serious usage: we must have used this technology "
+"on real project work. We firmly believe that you can’t really fully assess "
+"technology unless you’ve used it to solve real problems, and understand both "
+"its weaknesses and strengths. Often, the assess phase shows benefits but not "
+"limitations, whereas solving real problems provides a holistic view."
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:36
+msgid "Bewerten/Evaluieren"
+msgstr "Assess"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:37
+msgid ""
+"<b>Bewerten/Evaluieren:</b> Vorschl&auml;ge, die angeschaut, bewertet und "
+"weiter\n"
+"                beobachtet werden sollten."
+msgstr ""
+"AssessThe assess ring indicates that a technology is worth exploring with "
+"the goal of understanding how it will affect you. You should invest some "
+"effort (such as development spikes, research projects, attend conference "
+"sessions, etc.) to see if it will have an impact on your organization. For "
+"example, many large companies visibly went through this phase when "
+"formulating a mobile strategy."
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:46
+msgid "Beibehalten"
+msgstr "Keep"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:47
+msgid ""
+"<b>Beibehalten:</b> Vorschl&auml;ge, die schon in der Breite verwendet "
+"werden, evtl.\n"
+"                nicht mehr der letzte Schrei sind, aber beibehalten werden "
+"sollen."
+msgstr ""
+"Hold - The original intent of the hold ring was “hold off for now”, to "
+"represent technologies that were too new to reasonably assess yet. We had in "
+"mind technologies that were getting lots of buzz but weren’t proven. The "
+"hold ring has evolved into our way of saying “don’t start anything new with "
+"this technology”. There’s no harm in using it on existing projects, but you "
+"should think twice about using this technology for new development. Hold is "
+"the closest we have to an avoid category, which Rebecca won’t let us have. "
+"But we’ve come to see great wisdom in that decision: true to the metaphor, "
+"your radar should be about things you are looking towards, not "
+"recriminations about the past."
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:56
+msgid "Vermeiden/Abschaffen"
+msgstr "Abolish"
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/rating-pane.php:57
+msgid ""
+"<b>Vermeiden/Abschaffen:</b> Vorschl&auml;ge, die nicht verwendet werden "
+"sollten, egal\n"
+"                ob sie aktuell eingesetzt werden, oder neue Vorschl&auml;ge "
+"sind."
+msgstr ""
+"Abolish - stuff considered deprecated, obsolete and that should be avoided."
+
+#: /Users/stefanweber/Code/TechRating/tech-rating/gui/vote.php:28
+msgid "Vorschl&auml;ge"
+msgstr "Technologies"

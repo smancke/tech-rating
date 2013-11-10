@@ -1,5 +1,4 @@
-
-GLOBAL = new Object();
+GLOBAL = {};
 GLOBAL.categories = undefined;
 GLOBAL.dragging = false;
 
@@ -46,7 +45,7 @@ function activatePaneTab(paneName) {
 }
 
 function showRatingPane(paneName) {
-    $.get("rating-pane.html", function(data) {
+    $.get("rating-pane.php", function(data) {
         $("#content-root").replaceWith(data);
         initRatingPane(paneName);
         activatePaneTab(paneName);
@@ -79,7 +78,7 @@ function initRatingPane(paneName) {
 }
 
 function showPane(paneName) {
-    $.get(paneName + "-pane.html", function(data) {
+    $.get(paneName + "-pane.php", function(data) {
         $("#content-root").replaceWith(data);
         $("#username").focus();
         activatePaneTab(paneName);
@@ -89,7 +88,7 @@ function showPane(paneName) {
 /// -------------- Login Handling ----------------------
 itemPane = {
     show: function(paneName) {
-        $.get("createItem-pane.html", function(data) {
+        $.get("createItem-pane.php", function(data) {
             $("#content-root").replaceWith(data);
             for (var i in GLOBAL.categories) {
                 $('<option value="'+ GLOBAL.categories[i].id +'">' + GLOBAL.categories[i].name +'</option>')
@@ -211,7 +210,7 @@ function doLogin(username, password) {
     REST.login(username, password, function() {
         $('body').css('cursor', 'auto');
         showMenuElements();
-        $("#link-login").replaceWith('<a id="link-logout" href="javascript:doLogout()">Logout</>')
+        $("#link-login").replaceWith('<a id="link-logout" href="javascript:doLogout()">Logout</a>')
 
         showRadarPane();
     }, function() {

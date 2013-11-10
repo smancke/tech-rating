@@ -2,9 +2,9 @@
 
 require 'base.php';
 
-if (!$app->projectRights['is_owner']) {
+if (!$cfg->demo_login_enabled && !$app->projectRights['is_owner']) {
     Header('HTTP/1.0 401 Unauthorized');
-    echo 'Not allowd!';
+    echo 'Not allowed!';
     exit;
 }
 

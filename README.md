@@ -13,7 +13,7 @@ Installation is very easy.
 Prerequirements:
 - A web server (e.g. tested with apache v2.4.6)
 - apache mod_rewrite enabled
-- PHP5 (tested with v5.5.3)
+- PHP5 (tested with v5.5.3, 5.4+ should work)
 - Python (configured as CGI, see below) (tested with v2.7.5 and v2.6.6)
 - mySQL (tested with v5.5.32)
 Older versions of the software should work as well
@@ -64,4 +64,13 @@ because the parsing from python is currently not very robust.)
   - Register your application within the google api console (https://code.google.com/apis/console/)
   - Change the google parameters within the config.php
   - change demo\_login\_enabled to 'false'
-  - delete the file ./gui/demoLogin.php 
+  - delete the file ./gui/demoLogin.php
+
+7. Localization
+  - This is 'under construction' - currently the base is German and an English translation is provided
+  - Since the DB does not support localized content, the locale is set per installation in base.php
+  - The locale is determined in base.php and the translation is handled by PHP gettext and po files
+  - The locale string needs to match your OS naming convention, see `locale -a` on Linux & Co
+  - use `msgfmt messages.po -o messages.mo` to compile the translations
+  - a server restart may be required, e.g. `sudo /etc/init.d/apache2 restart`
+  - see http://blog.lingohub.com/developers/2013/07/php-internationalization-with-gettext-tutorial/#Directory_structure

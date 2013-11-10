@@ -34,7 +34,7 @@ CREATE TABLE `advice` (
   CONSTRAINT `advice_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `advice_ibfk_2` FOREIGN KEY (`ratingitem_id`) REFERENCES `ratingitem` (`id`) ON DELETE CASCADE,
   CONSTRAINT `advice_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

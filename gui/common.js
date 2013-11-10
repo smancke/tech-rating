@@ -1,11 +1,11 @@
 
 var radius = {
     abolish: {start: 340, end: 395, label: "Vermeiden/Abschaffen", color: '#B4B4B4' },
-    hold: {start: 265, end: 340, label: "Beibehalten", color: '#f4faf4'},
-    regard: {start: 195, end: 260, label: "Bewerten/Evaliueren", color: '#f4f0f4'},
-    try: {start: 130, end: 195, label: "Testweise einsetzen", color: '#e0e0ff'},
-    adopt: {start: 0, end: 130, label: "Einf\u00FChren", color: '#ffd4b0'},
-    ignore: {start: 0, end: 0, label: "Ignorieren", color: '#cccccc'}
+    hold: {start: 265, end: 340, label: "Hold - Beibehalten", color: '#f4faf4'},             // = hold
+    regard: {start: 195, end: 260, label: "Assess - Bewerten/Evaliueren", color: '#f4f0f4'},   // = assess
+    try: {start: 130, end: 195, label: "Trial - Testweise einsetzen", color: '#e0e0ff'},      // = trial
+    adopt: {start: 0, end: 130, label: "Adopt - Einf\u00FChren", color: '#ffd4b0'},           // = adopt
+    ignore: {start: 0, end: 0, label: "Ignore - Ignorieren", color: '#cccccc'}  // is this used?
 }
 
 

@@ -23,7 +23,7 @@ if (isset($_GET['code'])
 ?><!DOCTYPE html>
 <html>
   <head>
-    <title>Tech Rating - login</title>
+    <title><?=_('Tech Rating - Login')?></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
