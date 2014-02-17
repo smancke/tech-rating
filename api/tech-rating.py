@@ -3,22 +3,30 @@
 import os, sys
 sys.path.append(os.path.dirname(__file__))
 
-from bottle import route, run, debug, request, response, redirect, static_file, abort, default_app
+from bottle import Bottle, route, run, debug, request, response, redirect, static_file, abort, default_app
 from helper import jdump, context, cfg, escape
 import imaplib
 
-@route('/<project>/category', method='GET')
+app = Bottle()
+
+@app.hook('after_request')
+def enable_cors():
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'PUT, GET, POST, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
+
+@app.route('/<project>/category', method='GET')
 def get_categories(project):
     with context(project, 'read') as cntx:
         return jdump(cntx.db.fetchdicts("SELECT * FROM category ORDER BY orderindex"))
     
-@route('/<project>/ratingitem', method='GET')
+@app.route('/<project>/ratingitem', method='GET')
 def get_ratingitems(project):
     with context(project, 'read') as cntx:
         item_self_link = cntx.db.concat("'" + "/api/"+ project + "/ratingitem/'", "id");
         return jdump(cntx.db.fetchdicts("SELECT *, "+item_self_link+" as self FROM ratingitem WHERE project_id = %s ORDER BY name", [cntx.pid]))
 
-@route('/<project>/fullratingitem', method='GET')
+@app.route('/<project>/fullratingitem', method='GET')
 def get_fullratingitems(project):
     with context(project, 'read') as cntx:
         category = request.query.get('category')
@@ -47,19 +55,19 @@ def get_ratingitem_data(cntx, project, no):
     ratingitem['maxAdvice'] = maxAdvice;
     return ratingitem;
 
-@route('/<project>/ratingitem/<no>', method='GET')
+@app.route('/<project>/ratingitem/<no>', method='GET')
 def get_ratingitem(project, no):
     with context(project, 'read') as cntx:
         return jdump(get_ratingitem_data(cntx, project, no));
 
-@route('/<project>/ratingitem/<no>', method='DELETE')
+@app.route('/<project>/ratingitem/<no>', method='DELETE')
 def delete_ratingitem(project, no):
     with context(project, 'delete') as cntx:
         cntx.db.execute("DELETE FROM ratingitem WHERE id = %s AND project_id = %s", [no, cntx.pid]);
         cntx.db.execute("DELETE FROM advice WHERE ratingitem_id = %s AND project_id = %s", [no, cntx.pid]);        
         return '{"status": "ok"}'
 
-@route('/<project>/ratingitem', method='POST')
+@app.route('/<project>/ratingitem', method='POST')
 def create_ratingitem(project):
     with context(project, 'write') as cntx:
         item = request.json
@@ -68,7 +76,7 @@ def create_ratingitem(project):
                               [escape(item['name']), escape(item['description']), escape(item['category']), cntx.userid, cntx.pid])
         return redirect("/api/" +project+ "/ratingitem/" + str(dbid), 201);
 
-@route('/<project>/ratingitem/<no>', method='PUT')
+@app.route('/<project>/ratingitem/<no>', method='PUT')
 def update_ratingitem(project, no):
     with context(project, 'write') as cntx:
         item = request.json            
@@ -78,7 +86,7 @@ def update_ratingitem(project, no):
                                [escape(item['name']), escape(item['description']), escape(item['category']), cntx.userid, no, cntx.pid])
         return '{"status": "ok"}'
 
-@route('/<project>/advice', method='POST')
+@app.route('/<project>/advice', method='POST')
 def create_advice(project):
     with context(project, 'write') as cntx:
         advice = request.json
@@ -91,19 +99,19 @@ def create_advice(project):
                                [cntx.userid, escape(str(advice['ratingitem_id'])), escape(advice['advice']), cntx.pid]);
         return redirect("/api/"+project+"/advice/" + str(cntx.userid) + "/"+ str(advice['ratingitem_id']), 201);
 
-@route('/<project>/advice/<user>/<ratingitem_id>', method='GET')
+@app.route('/<project>/advice/<user>/<ratingitem_id>', method='GET')
 def get_advice(project, user, ratingitem_id):
     with context(project, 'read') as cntx:
         return jdump(cntx.db.fetchdict("SELECT * FROM advice WHERE user_id = %s and ratingitem_id = %s AND project_id = %s""",
                                        [user, ratingitem_id, cntx.pid]));
     
-@route('/<project>/user_advices', method='GET')
+@app.route('/<project>/user_advices', method='GET')
 def get_advices_bv_user(project):
     with context(project, 'read') as cntx:
         return jdump(cntx.db.fetchdicts("SELECT * FROM advice WHERE user_id = %s AND project_id = %s""",
                                         [cntx.userid, cntx.pid]));
 
-@route('/<project>/timeline', method='GET')
+@app.route('/<project>/timeline', method='GET')
 def get_timeline(project):
     offset = 0
     limit = 300
@@ -120,7 +128,7 @@ def get_timeline(project):
     
 
 
-run(server='cgi')
+app.run(server='cgi')
 
 #debug(cfg['debug'])
 #    run(host=cfg['server_bind_host'], port=cfg['server_bind_port'], reloader=cfg['server_reloader'])
