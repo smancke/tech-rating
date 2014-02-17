@@ -2,6 +2,9 @@
 var REST = new Object();
 REST.async = true;
 REST.prefix = '/api/' + global_project;  //the global_project is comming from php
+if (global_base_uri != null) {
+    REST.prefix = global_base_uri + REST.prefix;
+}
 REST.url_login = REST.prefix + '/login';
 REST.url_logout = REST.prefix + '/logout';
 REST.url_timeline = REST.prefix + '/timeline';

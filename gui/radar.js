@@ -1,12 +1,17 @@
 GLOBAL = new Object();
 GLOBAL.categories = undefined;
 
+function errorHandler(message) {
+    alert("Fehler beim laden der Anwendung ("+message+")");
+}
 
 $(function() {
-    REST.get(REST.url_category, function(categories) {
-        GLOBAL.categories = categories;        
-        $('#radar').svg({onLoad: draw});
-    });
+    REST.get(REST.url_category, 
+             function(categories) {
+                 GLOBAL.categories = categories;        
+                 $('#radar').svg({onLoad: draw});
+             }, 
+             errorHandler);
 });
 
 
@@ -28,9 +33,6 @@ function x(coord) {
 }
 function y(coord) {
     return 400+coord;
-}
-function errorHandler(message) {
-    alert("Fehler beim laden der Anwendung ("+message+")");
 }
 
 function drawRadarCircle(svg, desc, color) {
