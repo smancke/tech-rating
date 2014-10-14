@@ -48,7 +48,7 @@ function enableTooltips() {
         parent.on('mouseover', function(event) {showTooltip(event, parent, $(element))});
         parent.on('mousemove', function(event) {moveTooltip(event, parent, $(element))});
         parent.on('mouseout', function(event) {hideTooltip($(element))});
-        parent.on('mousedown', function(event) {hideTooltip($(element))});
+        parent.on('mousedown', function(event) {showTooltip($(element))});
         $(element).removeClass('svgtooltip').addClass('active-tooltip');
         $(element).appendTo($('body'));
     });
