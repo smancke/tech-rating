@@ -167,7 +167,7 @@ function loadTimeline() {
 function getBiggestAdvice(itemlist) {
     biggestAdvice = 0;
     for (var i in itemlist) {
-        item = itemlist[i];
+        var item = itemlist[i];
         if (item.advices[item.maxAdvice] > biggestAdvice)
             biggestAdvice = item.advices[item.maxAdvice];
     }
@@ -182,7 +182,7 @@ function draw(svg) {
         showAllLabels = itemlist.length < 30;
         biggestAdvice = getBiggestAdvice(itemlist);
         for (var i in itemlist) {
-            item = itemlist[i];
+            var item = itemlist[i];
             if (item.maxAdvice != 'ignore') {
                 try {
                     drawRatingItem(svg, item, showAllLabels, biggestAdvice);
@@ -190,6 +190,7 @@ function draw(svg) {
                 catch(err)
                 {
                     console.log("error while drawing item %o", err)
+                    console.log(err.stack);
                 }
             }
         }
