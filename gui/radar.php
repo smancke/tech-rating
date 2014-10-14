@@ -7,18 +7,34 @@ require('base.php')
 <head>
 <meta charset="utf-8" />
 <title>Tech Rating <?=$app->project ? '- '.$app->projectInfo['title'] : '' ?></title>
+<script>
+     global_project = '<?=$app->project?>';
+</script>
 <script src="/lib/jquery.js"></script>
-<script src="/lib/jquery-ui.min.js"></script>
+<script src="/gui/restclient.js"></script>
+<script>
+GLOBAL = new Object();
+GLOBAL.categories = null;
+GLOBAL.fullratingitems = null;
+
+function errorHandler(message) {
+  alert("Fehler beim laden der Anwendung ("+message+")");
+}
+
+REST.get(REST.url_fullratingitem, function(itemlist) {
+    GLOBAL.fullratingitems = itemlist;
+  },errorHandler);
+
+REST.get(REST.url_category, function(categories) {
+    GLOBAL.categories = categories;
+  },errorHandler);
+
+</script>
 <script type="text/javascript" src="/lib/jquery.svg.js"></script>
 <script src="/lib/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/lib/jquery.svg.css">
 <link rel="stylesheet" type="text/css" href="/lib/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/gui/tech-rating.css">
-
-<script>
-     global_project = '<?=$app->project?>';
-</script>
-<script src="/gui/restclient.js"></script>
 <script src="/gui/radar.js"></script>
 <script src="/gui/common.js"></script>
 </head>

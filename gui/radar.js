@@ -1,18 +1,26 @@
-GLOBAL = new Object();
-GLOBAL.categories = undefined;
 
-function errorHandler(message) {
-    alert("Fehler beim laden der Anwendung ("+message+")");
+function drawChecked(svg) {
+    if (GLOBAL.fullratingitems != null 
+        && GLOBAL.categories != null) {
+        
+        draw(svg, GLOBAL.fullratingitems);
+    } else {
+        window.setTimeout(function(){drawChecked(svg)}, 10);
+    }
 }
 
 $(function() {
-    REST.get(REST.url_category, 
-             function(categories) {
-                 GLOBAL.categories = categories;        
-                 $('#radar').svg({onLoad: draw});
-             }, 
-             errorHandler);
+    $('#radar').svg({onLoad: drawChecked});
 });
+
+//$(function() {
+//    REST.get(REST.url_category, 
+//             function(categories) {
+//                 GLOBAL.categories = categories;        
+//                 $('#radar').svg({onLoad: draw});
+//             }, 
+//             errorHandler);
+//});
 
 
 // list with all positions of items [{x:int, y:int}]
@@ -174,28 +182,26 @@ function getBiggestAdvice(itemlist) {
     return biggestAdvice;
 }
 
-function draw(svg) {
+function draw(svg, itemlist) {
     allPositions = [];
     initSectors();
     drawRadar(svg);
-    REST.get(REST.url_fullratingitem, function(itemlist) {
-        showAllLabels = itemlist.length < 30;
-        biggestAdvice = getBiggestAdvice(itemlist);
-        for (var i in itemlist) {
-            var item = itemlist[i];
-            if (item.maxAdvice != 'ignore') {
-                try {
-                    drawRatingItem(svg, item, showAllLabels, biggestAdvice);
-                }
-                catch(err)
-                {
-                    console.log("error while drawing item %o", err)
-                    console.log(err.stack);
-                }
+    showAllLabels = itemlist.length < 30;
+    biggestAdvice = getBiggestAdvice(itemlist);
+    for (var i in itemlist) {
+        var item = itemlist[i];
+        if (item.maxAdvice != 'ignore') {
+            try {
+                drawRatingItem(svg, item, showAllLabels, biggestAdvice);
+            }
+            catch(err)
+            {
+                console.log("error while drawing item %o", err)
+                console.log(err.stack);
             }
         }
-        enableTooltips();        
-    }, errorHandler);
+    }
+    enableTooltips();        
     loadTimeline();
 }
 
