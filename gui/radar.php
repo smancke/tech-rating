@@ -12,24 +12,6 @@ require('base.php')
 </script>
 <script src="/lib/jquery.js"></script>
 <script src="/gui/restclient.js"></script>
-<script>
-GLOBAL = new Object();
-GLOBAL.categories = null;
-GLOBAL.fullratingitems = null;
-
-function errorHandler(message) {
-  alert("Fehler beim laden der Anwendung ("+message+")");
-}
-
-REST.get(REST.url_fullratingitem, function(itemlist) {
-    GLOBAL.fullratingitems = itemlist;
-  },errorHandler);
-
-REST.get(REST.url_category, function(categories) {
-    GLOBAL.categories = categories;
-  },errorHandler);
-
-</script>
 <script type="text/javascript" src="/lib/jquery.svg.js"></script>
 <script src="/lib/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/lib/jquery.svg.css">

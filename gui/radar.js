@@ -1,3 +1,18 @@
+GLOBAL = new Object();
+GLOBAL.categories = null;
+GLOBAL.fullratingitems = null;
+
+function errorHandler(message) {
+  alert("Fehler beim laden der Anwendung ("+message+")");
+}
+
+REST.get(REST.url_fullratingitem, function(itemlist) {
+    GLOBAL.fullratingitems = itemlist;
+  },errorHandler);
+
+REST.get(REST.url_category, function(categories) {
+    GLOBAL.categories = categories;
+  },errorHandler);
 
 function drawChecked(svg) {
     if (GLOBAL.fullratingitems != null 
