@@ -20,6 +20,9 @@ $db = new dbFacile_mysql();
 $db->open($cfg->db_name, $cfg->db_user, $cfg->db_password, $cfg->db_host);
 if ($cfg->db_logfile)
     $db->setLogile($cfg->db_logfile);
+
+$db->execute('SET SESSION SQL_MODE=\'ANSI_QUOTES\'');
+
 $userMgr = new UserManager($db);
 
 if (isset($_COOKIE['s'])) {

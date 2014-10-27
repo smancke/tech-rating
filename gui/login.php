@@ -10,7 +10,7 @@ $loginHandler = new LoginHandler($googleLogin);
 if (isset($_GET['code']) 
     && $loginHandler->login()
     && $loginHandler->ensureUserAndStartSession($userMgr)
-    && $loginHandler->updateMyCircles($userMgr)
+    //&& $loginHandler->updateMyCircles($userMgr)
     ) {
 
     Header('Location: '.$loginHandler->getNextAction('/rating'));
