@@ -14,6 +14,11 @@ class dbFacile_mysql extends dbFacile {
 		return mysql_error($this->connection);
 	}
 
+	// Backticks work in mysql, but I get compatibitity problem with them to Postgresql
+	public function quoteField($field) {
+		return $field;
+	}
+
 	public function escapeString($string) {
 		return mysql_real_escape_string($string);
 	}
