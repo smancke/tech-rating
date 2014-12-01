@@ -2,7 +2,7 @@
 var radius = {
     abolish: {start: 340, end: 395, label: "Vermeiden/Abschaffen", color: '#B4B4B4' },
     hold: {start: 265, end: 340, label: "Beibehalten", color: '#f4faf4'},
-    regard: {start: 195, end: 260, label: "Bewerten/Evaliueren", color: '#f4f0f4'},
+    regard: {start: 195, end: 260, label: "Bewerten/Evaluieren", color: '#f4f0f4'},
     try: {start: 130, end: 195, label: "Testweise einsetzen", color: '#e0e0ff'},
     adopt: {start: 0, end: 130, label: "Einf\u00FChren", color: '#ffd4b0'},
     ignore: {start: 0, end: 0, label: "Ignorieren", color: '#cccccc'}
